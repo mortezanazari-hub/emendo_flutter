@@ -1,6 +1,6 @@
-# emen_taskmanagment
+# emenDo
 
-emen task managment is our first application
+EmenDo is our first application
 
 ## Getting Started
 
