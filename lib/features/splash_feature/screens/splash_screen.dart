@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../core/utils/app_const.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -51,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
               Spacer(),
               Text(
-                "Version 0.01 alpha",
+                AppConst.appVersion,
                 style: TextStyle(
                     color: Color(0xffa8afc2),
                     fontSize: 10,
