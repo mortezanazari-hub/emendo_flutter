@@ -1,5 +1,7 @@
-import 'package:emen_taskmanagment/features/splash_feature/screens/splash_screen.dart';
+import 'package:emendo/features/splash_feature/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'core/utils/app_const.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,6 +13,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    AppConst.screenWidth = MediaQuery.of(context).size.width;
+    AppConst.screenHeight = MediaQuery.of(context).size.height;
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'EmenDo',
@@ -23,5 +27,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,3 +1,4 @@
+import 'package:emendo/features/auth_feature/presentation/pages/first_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,7 +16,20 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => const FirstAuthScreen(),
+      ));
+    });
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+    super.dispose();
   }
 
   @override
@@ -31,19 +45,22 @@ class _SplashScreenState extends State<SplashScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  ///Emen
                   Text(
                     "Emen",
                     style: TextStyle(color: Color(0xff121212), fontSize: 33),
                   ),
+
+                  ///Do.
                   Text(
                     "Do.",
-                    style: TextStyle(color: Color(0xff479b2c), fontSize: 33),
+                    style: TextStyle(color: AppConst.mainColor, fontSize: 33),
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
+
+              ///Project Management App
               Text(
                 "Project Management App",
                 style: TextStyle(
@@ -52,6 +69,8 @@ class _SplashScreenState extends State<SplashScreen>
                     fontWeight: FontWeight.w100),
               ),
               Spacer(),
+
+              ///version
               Text(
                 AppConst.appVersion,
                 style: TextStyle(
@@ -59,7 +78,7 @@ class _SplashScreenState extends State<SplashScreen>
                     fontSize: 10,
                     fontWeight: FontWeight.w100),
               ),
-              SizedBox(height: 20,)
+              SizedBox(height: 20)
             ],
           )),
     );
