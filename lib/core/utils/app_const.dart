@@ -17,5 +17,7 @@ class AppConst {
   ///colors:
   static const Color mainColor = Color(0xff479b2c);
   static const Color secondColor = Color(0xffffffff);
+  static const Color disabledColor = Color(0xffbabfcd);
+
 
 }
