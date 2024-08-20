@@ -1,6 +1,8 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/widgets/app_button.dart';
 import 'package:emendo/core/widgets/app_link_text.dart';
+import 'package:emendo/features/auth_feature/presentation/pages/login_screen.dart';
+import 'package:emendo/features/auth_feature/presentation/pages/register_screen.dart';
 import 'package:emendo/features/auth_feature/presentation/widgets/first_auth_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -74,14 +76,22 @@ class _FirstAuthScreenState extends State<FirstAuthScreen> {
               ///Create Account
               AppButton(
                 text: "Create Account",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const RegisterScreen(),
+                  ));
+                },
               ),
               const SizedBox(height: 10),
 
               ///Already Have an Account
               AppLinkText(
                 text: "Already Have an Account",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const LoginScreen(),
+                  ));
+                },
               )
 
               //Spacer(),
