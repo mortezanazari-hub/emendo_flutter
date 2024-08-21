@@ -43,7 +43,7 @@ class _AppInputTextState extends State<AppInputText> {
             textAlign: TextAlign.left,
             style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
           ),
-          const SizedBox(height: 10),
+           SizedBox(height: AppConst.standardPadding *.1),
           TextField(
             focusNode: _focusNode,
             obscureText: _isPassword,
@@ -86,8 +86,8 @@ class _AppInputTextState extends State<AppInputText> {
               ),
               suffix: widget.isPassword
                   ? GestureDetector(
-                      child: const Icon(
-                        Icons.remove_red_eye_outlined,
+                      child:  Icon(
+                       _isPassword? Icons.remove_red_eye_outlined :Icons.remove_red_eye,
                         color: AppConst.disabledColor,
                       ),
                       onTap: () {
@@ -111,7 +111,7 @@ class _AppInputTextState extends State<AppInputText> {
   @override
   void initState() {
     super.initState();
-    widget.isPassword == null
+    widget.isPassword == false
         ? _isPassword = false
         : _isPassword = widget.isPassword;
     _focusNode.addListener(() {

@@ -20,6 +20,7 @@ class _FirstAuthScreenState extends State<FirstAuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffffffff),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

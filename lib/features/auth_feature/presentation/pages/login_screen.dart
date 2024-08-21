@@ -4,6 +4,7 @@ import 'package:emendo/core/widgets/app_input_text.dart';
 import 'package:emendo/core/widgets/app_link_text.dart';
 import 'package:emendo/core/widgets/app_title_description.dart';
 import 'package:emendo/features/auth_feature/presentation/pages/register_screen.dart';
+import 'package:emendo/features/auth_feature/presentation/widgets/forget_password_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,6 +14,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffffffff),
       body: SingleChildScrollView(
         child: SafeArea(
           child:
@@ -32,12 +34,12 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: AppConst.standardPadding),
             AppInputText(
               title: "Password",
-              hint: "Create your Password",
+              hint: "Enter your Password",
               isPassword: true,
               icon: Icons.lock_outline,
               onChanged: (value) => {},
             ),
-            SizedBox(height: AppConst.standardPadding*0.5),
+            SizedBox(height: AppConst.standardPadding * 0.1),
             Padding(
               padding: EdgeInsets.only(right: AppConst.standardPadding),
               child: Row(
@@ -45,17 +47,33 @@ class LoginScreen extends StatelessWidget {
                   const Spacer(),
                   AppLinkText(
                     text: "Forget Password?",
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet(
+                          backgroundColor: Colors.white,
+                          useSafeArea: true,
+                          constraints: BoxConstraints(
+                            maxHeight: AppConst.screenHeight * .35,
+                            minHeight: 295,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(AppConst.standardPadding)),
+                          ),
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const ForgetPasswordModal();
+                          });
+                    },
                   ),
                 ],
               ),
             ),
-            SizedBox(height: AppConst.standardPadding*0.5),
+            SizedBox(height: AppConst.standardPadding),
             AppButton(
               text: "Sign In",
               onPressed: () {},
             ),
-            SizedBox(height: AppConst.standardPadding*0.5),
+            SizedBox(height: AppConst.standardPadding * 0.1),
             Padding(
               padding: EdgeInsets.only(right: AppConst.standardPadding),
               child: Row(
@@ -84,7 +102,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: AppConst.standardPadding * .75),
+            SizedBox(height: AppConst.standardPadding * .25),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

@@ -1,5 +1,5 @@
 import 'package:emendo/features/auth_feature/presentation/pages/login_screen.dart';
-import 'package:emendo/features/auth_feature/presentation/pages/register_screen.dart';
+import 'package:emendo/features/auth_feature/presentation/pages/verification_screen.dart';
 import 'package:emendo/features/splash_feature/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       //   useMaterial3: true,
       // ),
 
-      home: SplashScreen(),
+      home: Verification_Screen(),
     );
   }
 }

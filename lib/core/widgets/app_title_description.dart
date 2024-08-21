@@ -11,7 +11,7 @@ class AppTitleDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding:  EdgeInsets.symmetric(horizontal:AppConst.standardPadding ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -20,16 +20,13 @@ class AppTitleDescription extends StatelessWidget {
             textAlign: TextAlign.start,
             style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: AppConst.standardPadding * 0.1),
           Text(description,
               textAlign: TextAlign.start,
               style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w300,
                   color: AppConst.disabledColor)),
-
         ],
       ),
     );

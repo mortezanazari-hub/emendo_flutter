@@ -13,6 +13,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xffffffff),
       body: SingleChildScrollView(
         child: SafeArea(
           child:
@@ -54,7 +55,7 @@ class RegisterScreen extends StatelessWidget {
               padding: EdgeInsets.only(right: AppConst.standardPadding),
               child: Row(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   AppLinkText(
                     text: "Already have account?",
                     onPressed: () {
