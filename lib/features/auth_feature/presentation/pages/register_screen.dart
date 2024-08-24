@@ -4,6 +4,7 @@ import 'package:emendo/core/widgets/app_input_text.dart';
 import 'package:emendo/core/widgets/app_link_text.dart';
 import 'package:emendo/core/widgets/app_title_description.dart';
 import 'package:emendo/features/auth_feature/presentation/pages/login_screen.dart';
+import 'package:emendo/features/auth_feature/presentation/pages/verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -48,7 +49,11 @@ class RegisterScreen extends StatelessWidget {
             SizedBox(height: AppConst.standardPadding),
             AppButton(
               text: "Create Account",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => const Verification_Screen(),
+                ));
+              },
             ),
             SizedBox(height: AppConst.standardPadding*0.5),
             Padding(

@@ -16,14 +16,14 @@ class AppLinkText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPressed,
+    return InkWell(
+      onTap: onPressed,
       child: Text(
         text,
         textAlign: textAlign ?? TextAlign.left,
         style: TextStyle(
           color: AppConst.mainColor,
-          fontSize: AppConst.screenWidth * 0.035,
+          fontSize: AppConst.standardDescriptionFontSize,
         ),
       ),
     );

@@ -4,15 +4,20 @@ import 'package:flutter/material.dart';
 class ResultIcon extends StatefulWidget {
   final double size;
   final Color color;
+  final IconData? icon;
 
-  const ResultIcon({required this.size, required this.color, super.key});
+  const ResultIcon({
+    required this.size,
+    required this.icon,
+    required this.color,
+    super.key,
+  });
 
   @override
   State<ResultIcon> createState() => _ResultIconState();
 }
 
 class _ResultIconState extends State<ResultIcon> {
-
   @override
   Widget build(BuildContext context) {
     final halfSize = widget.size / 2;
@@ -34,7 +39,7 @@ class _ResultIconState extends State<ResultIcon> {
                 color: widget.color,
               ),
               child: Icon(
-                Icons.mail_lock,
+                widget.icon,
                 size: widget.size * 0.3,
                 color: Colors.white,
               ),
