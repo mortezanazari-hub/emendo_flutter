@@ -4,6 +4,9 @@ class AppConst {
   ///version:
   static const String appVersion = "ver: 0.1a";
 
+  ///api provider
+  static const String apiBase = "https://emendo.liara.run/api/";
+
   ///screen size:
   static double screenWidth = 280;
   static double screenHeight = 720;

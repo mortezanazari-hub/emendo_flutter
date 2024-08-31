@@ -1,42 +1,27 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:emendo/features/auth_feature/domain/entities/user_entity.dart';
 
-part 'user_model.g.dart';
-
-@JsonSerializable()
-class UserModel {
-  final int id;
-  final String username;
-  final String email;
-  @JsonKey(nullable: true)
-  final String? mobile;
-  @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson, nullable: true)
-  final DateTime? emailVerifiedAt;
-  @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
-  final DateTime createdAt;
-  @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
-  final DateTime updatedAt;
-
-  UserModel({
-    required this.id,
-    required this.username,
-    required this.email,
-    this.mobile,
-    this.emailVerifiedAt,
-    required this.createdAt,
-    required this.updatedAt,
+class UserModel extends UserEntity {
+  const UserModel({
+    required super.id,
+    required super.username,
+    required super.email,
+    required super.createdAt,
+    required super.updatedAt,
+    super.mobile,
+    super.emailVerifiedAt,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
-
-  static DateTime? _dateTimeFromJson(dynamic json) {
-    if (json == null) return null;
-    return DateTime.parse(json as String);
-  }
-
-  static String? _dateTimeToJson(DateTime? date) {
-    return date?.toIso8601String();
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'],
+      username: json['username'],
+      email: json['email'],
+      mobile: json['mobile'],
+      emailVerifiedAt: json['email_verified_at'] != null
+          ? DateTime.parse(json['email_verified_at'])
+          : null,
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
+    );
   }
 }
