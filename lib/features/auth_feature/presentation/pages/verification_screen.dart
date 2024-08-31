@@ -39,13 +39,13 @@ class _Verification_ScreenState extends State<Verification_Screen> {
             SizedBox(height: AppConst.standardPadding *3),
             Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 ResultIcon(
                   icon: Icons.mail_lock,
                   color: AppConst.mainColor,
                   size: AppConst.screenWidth * 0.33,
                 ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
             SizedBox(height: AppConst.standardPadding),
