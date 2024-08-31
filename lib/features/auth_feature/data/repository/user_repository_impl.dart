@@ -13,7 +13,7 @@ class UserRepositoryImpl extends UserRepository {
   Future<UserEntity> getUser(String token) async {
     try {
       final response = await dio.get(
-        "${AppConst.apiBase}user",
+        "${AppConst.apiBase}/user",
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',
