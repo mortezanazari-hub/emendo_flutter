@@ -1,5 +1,4 @@
-import 'package:emendo/features/auth_feature/presentation/pages/login_screen.dart';
-import 'package:emendo/features/auth_feature/presentation/pages/verification_screen.dart';
+import 'package:emendo/di.dart';
 import 'package:emendo/features/splash_feature/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -7,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'core/utils/app_const.dart';
 
 void main() {
-  
+  setup();
   runApp(const MyApp());
 }
 
