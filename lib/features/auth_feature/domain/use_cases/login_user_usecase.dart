@@ -2,11 +2,11 @@ import 'package:emendo/features/auth_feature/domain/entities/login_entity.dart';
 import 'package:emendo/features/auth_feature/domain/repositories/login_repository.dart';
 
 class LoginUseCase {
-  final LoginRepository repository;
+  final LoginRepository loginRepository;
 
-  LoginUseCase(this.repository);
+  LoginUseCase(this.loginRepository);
 
   Future<LoginEntity> call(String email, String password) async {
-    return await repository.login(email, password);
+    return await loginRepository.login(email, password);
   }
 }

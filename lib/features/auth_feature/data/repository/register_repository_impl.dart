@@ -1,19 +1,18 @@
-import 'package:dio/dio.dart';
-import 'package:emendo/core/utils/app_const.dart';
+import 'package:emendo/features/auth_feature/data/api_provider/api_provider.dart';
 import 'package:emendo/features/auth_feature/data/models/register_model.dart';
 import 'package:emendo/features/auth_feature/domain/entities/register_entity.dart';
 import 'package:emendo/features/auth_feature/domain/repositories/register_repository.dart';
 
 class RegisterRepositoryImpl implements RegisterRepository {
-  final Dio dio;
+  final ApiProvider apiProvider;
 
-  RegisterRepositoryImpl(this.dio);
+  RegisterRepositoryImpl(this.apiProvider);
 
   @override
   Future<RegisterEntity> register(String username, String email, String password) async {
     try {
-      final response = await dio.post(
-        "${AppConst.apiBase}/register",
+      final response = await apiProvider.post(
+        "/register",
         data: {
           'username': username,
           'email': email,

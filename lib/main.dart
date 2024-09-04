@@ -2,10 +2,12 @@ import 'package:emendo/features/auth_feature/presentation/pages/login_screen.dar
 import 'package:emendo/features/auth_feature/presentation/pages/verification_screen.dart';
 import 'package:emendo/features/splash_feature/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import 'core/utils/app_const.dart';
 
 void main() {
+  
   runApp(const MyApp());
 }
 
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppConst.screenWidth = MediaQuery.of(context).size.width;
     AppConst.screenHeight = MediaQuery.of(context).size.height;
+    GetIt getIt =GetIt.instance();
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'EmenDo',

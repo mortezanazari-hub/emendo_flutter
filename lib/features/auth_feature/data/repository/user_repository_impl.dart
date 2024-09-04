@@ -1,24 +1,21 @@
-import 'package:dio/dio.dart';
-import 'package:emendo/core/utils/app_const.dart';
+import 'package:emendo/features/auth_feature/data/api_provider/api_provider.dart';
 import 'package:emendo/features/auth_feature/data/models/user_model.dart';
 import 'package:emendo/features/auth_feature/domain/entities/user_entity.dart';
 import 'package:emendo/features/auth_feature/domain/repositories/user_repository.dart';
 
-class UserRepositoryImpl extends UserRepository {
-  final Dio dio;
+class UserRepositoryImpl implements UserRepository {
+  final ApiProvider apiProvider;
 
-  UserRepositoryImpl(this.dio);
+  UserRepositoryImpl(this.apiProvider);
 
   @override
   Future<UserEntity> getUser(String token) async {
     try {
-      final response = await dio.get(
-        "${AppConst.apiBase}/user",
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
+      final response = await apiProvider.get(
+        "/user",
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
       );
 
       if (response.statusCode == 200) {
@@ -30,7 +27,5 @@ class UserRepositoryImpl extends UserRepository {
     } catch (e) {
       throw Exception('Failed to load user: $e');
     }
-
-
   }
 }

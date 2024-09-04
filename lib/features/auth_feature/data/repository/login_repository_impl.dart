@@ -1,19 +1,19 @@
-import 'package:dio/dio.dart';
-import 'package:emendo/core/utils/app_const.dart';
+
+import 'package:emendo/features/auth_feature/data/api_provider/api_provider.dart';
 import 'package:emendo/features/auth_feature/data/models/login_model.dart';
 import 'package:emendo/features/auth_feature/domain/entities/login_entity.dart';
 import 'package:emendo/features/auth_feature/domain/repositories/login_repository.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
-  final Dio dio;
+  final ApiProvider apiProvider;
 
-  LoginRepositoryImpl(this.dio);
+  LoginRepositoryImpl(this.apiProvider);
 
   @override
   Future<LoginEntity> login(String email, String password) async {
     try {
-      final response = await dio.post(
-        "${AppConst.apiBase}/login",
+      final response = await apiProvider.post(
+        "/login",
         data: {
           'email': email,
           'password': password,

@@ -2,11 +2,11 @@ import 'package:emendo/features/auth_feature/domain/entities/verify_email_entity
 import 'package:emendo/features/auth_feature/domain/repositories/verify_email_repository.dart';
 
 class ValidateEmailUseCase {
-  final ValidateEmailRepository repository;
+  final ValidateEmailRepository validateEmailRepository;
 
-  ValidateEmailUseCase(this.repository);
+  ValidateEmailUseCase(this.validateEmailRepository);
 
   Future<ValidateEmailEntity> call(String token, String code) async {
-    return await repository.validateEmail(token, code);
+    return await validateEmailRepository.validateEmail(token, code);
   }
 }
