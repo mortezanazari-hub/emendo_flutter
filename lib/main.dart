@@ -5,8 +5,8 @@ import 'package:get_it/get_it.dart';
 
 import 'core/utils/app_const.dart';
 
-void main() {
-  setup();
+void main() async {
+  await setup();
   runApp(const MyApp());
 }
 
@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppConst.screenWidth = MediaQuery.of(context).size.width;
     AppConst.screenHeight = MediaQuery.of(context).size.height;
-    GetIt getIt =GetIt.instance();
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'EmenDo',

@@ -5,13 +5,14 @@ class AppInputText extends StatefulWidget {
   final bool isPassword;
   final bool isError;
   final ValueChanged<String> onChanged;
-
+final TextEditingController? controller;
   final String title;
   final String hint;
   final IconData icon;
 
   const AppInputText({
     super.key,
+    this.controller,
     required this.title,
     required this.hint,
     required this.icon,
@@ -45,6 +46,7 @@ class _AppInputTextState extends State<AppInputText> {
           ),
            SizedBox(height: AppConst.standardPadding *.1),
           TextField(
+            controller: widget.controller,
             focusNode: _focusNode,
             obscureText: _isPassword,
             onChanged: (value) {
