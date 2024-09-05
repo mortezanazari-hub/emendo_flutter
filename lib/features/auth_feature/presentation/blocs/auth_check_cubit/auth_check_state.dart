@@ -1,6 +1,10 @@
-part of 'auth_check_cubit.dart';
+part of 'auth_check_bloc.dart';
 
-@immutable
-sealed class AuthCheckState {}
+sealed class AuthCheckState extends Equatable {
+  const AuthCheckState();
+}
 
-final class AuthCheckInitial extends AuthCheckState {}
+final class AuthCheckInitial extends AuthCheckState {
+  @override
+  List<Object> get props => [];
+}
