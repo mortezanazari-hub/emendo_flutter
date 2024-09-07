@@ -19,6 +19,7 @@ class ApiProvider {
 
   Future<Response> post(String url, {required Map<String, dynamic> data, Map<String, dynamic>? headers}) async {
     final options = Options(headers: headers);
-    return await dio.post(url, data: data, options: options);
+    return await dio.post(url, queryParameters: data, options: options);
+
   }
 }

@@ -11,12 +11,12 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit(this.loginUseCase) : super(LoginInitial());
 
-  void login(String email, String password)  {
+   Future login(String email, String password) async {
     try {
       emit(LoginLoading());
-      emit(LoginSuccess(loginUseCase.loginRepository.login(email, password) as LoginEntity));
+      emit(LoginSuccess(await loginUseCase.loginRepository.login(email, password)));
     } catch (e) {
-      emit(LoginError("Failed to login"));
+      emit(LoginError("Can't connect"));
     }
   }
 }

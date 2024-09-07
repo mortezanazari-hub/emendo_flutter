@@ -1,4 +1,3 @@
-
 import 'package:emendo/features/auth_feature/data/api_provider/api_provider.dart';
 import 'package:emendo/features/auth_feature/data/models/login_model.dart';
 import 'package:emendo/features/auth_feature/domain/entities/login_entity.dart';
@@ -23,10 +22,10 @@ class LoginRepositoryImpl implements LoginRepository {
       if (response.statusCode == 200) {
         return LoginModel.fromJson(response.data);
       } else {
-        throw Exception('Failed to login');
+        throw Exception('Failed to login: {$response.statusCode}');
       }
     } catch (e) {
-      throw Exception('Failed to login: $e');
+      throw Exception('Failed to login : $e');
     }
   }
 }

@@ -20,14 +20,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppConst.screenWidth = MediaQuery.of(context).size.width;
     AppConst.screenHeight = MediaQuery.of(context).size.height;
-    return  MaterialApp(
+    return  const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'EmenDo',
-      home: MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (_) => locator<LoginCubit>()),
-          ],
-          child:const SplashScreen()),
+      home: SplashScreen(),
     );
   }
 }
