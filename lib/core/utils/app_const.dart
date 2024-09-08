@@ -1,11 +1,21 @@
 import 'dart:ui';
 
+import 'package:emendo/core/utils/get_api_token.dart';
+
 class AppConst {
   ///version:
   static const String appVersion = "ver: 0.1a";
 
   ///api provider
   static const String apiBase = "https://emendo.liara.run/api";
+
+
+  ///api_token
+  static String? apiToken ;
+
+  static Future<void> initializeApiToken() async {
+    apiToken = await GetApiToken.call();
+  }
 
   ///screen size:
   static double screenWidth = 280;

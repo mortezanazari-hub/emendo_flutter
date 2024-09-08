@@ -13,7 +13,7 @@ class RegisterRepositoryImpl implements RegisterRepository {
     try {
       final response = await apiProvider.post(
         "/register",
-        data: {
+        queryParameters: {
           'username': username,
           'email': email,
           'password': password,

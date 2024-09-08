@@ -10,10 +10,11 @@ class LoginRepositoryImpl implements LoginRepository {
 
   @override
   Future<LoginEntity> login(String email, String password) async {
+    //send
     try {
       final response = await apiProvider.post(
         "/login",
-        data: {
+        queryParameters: {
           'email': email,
           'password': password,
         },
@@ -22,10 +23,10 @@ class LoginRepositoryImpl implements LoginRepository {
       if (response.statusCode == 200) {
         return LoginModel.fromJson(response.data);
       } else {
-        throw Exception('Failed to login: {$response.statusCode}');
+        throw Exception('Failed to login: error {$response.statusCode}');
       }
     } catch (e) {
-      throw Exception('Failed to login : $e');
+      throw Exception("can't connect : $e");
     }
   }
 }

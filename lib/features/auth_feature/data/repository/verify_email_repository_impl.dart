@@ -14,7 +14,7 @@ class ValidateEmailRepositoryImpl implements ValidateEmailRepository {
     try {
       final response = await apiProvider.post(
         "/verify",
-        data: {
+        queryParameters: {
           'code': code,
         },
         headers: {
