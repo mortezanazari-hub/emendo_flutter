@@ -16,9 +16,21 @@ class LoginModel extends LoginEntity {
     final success = json['success'];
 
     //make api token to a local variable
-    if (apiToken != null) {
-      _saveApiToken(apiToken);
-    }
+    _saveApiToken(apiToken);
+
+    //make login result to model and entity
+    return LoginModel(
+      success: success,
+      data: data,
+      apiToken: apiToken,
+    );
+  }
+
+  factory LoginModel.fromJsonError(
+      {Map<String, dynamic>? json, String? error}) {
+    const apiToken = null;
+    final data = json != null ? json['message'] : error;
+    const success = false;
 
     //make login result to model and entity
     return LoginModel(

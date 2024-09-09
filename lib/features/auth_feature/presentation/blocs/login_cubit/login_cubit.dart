@@ -17,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginLoading());
       emit(LoginSuccess(await loginUseCase.loginRepository.login(email, password)));
     } catch (e) {
-      emit(LoginError("Can't connect"));
+      emit(LoginError(await loginUseCase.loginRepository.login(email, password)));
     }
   }
 }
