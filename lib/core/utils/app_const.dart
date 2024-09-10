@@ -9,6 +9,7 @@ class AppConst {
   ///api provider
   static const String apiBase = "https://emendo.liara.run/api";
 
+  static DateTime? lastOnlineDate;
 
   ///api_token
   static String? apiToken ;
