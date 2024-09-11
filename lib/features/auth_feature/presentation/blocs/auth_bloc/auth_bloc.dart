@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
+import 'package:emendo/features/auth_feature/domain/entities/user_entity.dart';
 import 'package:emendo/features/auth_feature/domain/use_cases/get_user_usecase.dart';
-import 'package:emendo/features/auth_feature/domain/usecases/get_user_usecase.dart';
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/features/auth_feature/presentation/blocs/auth_bloc/auth_event.dart';
 import 'package:emendo/features/auth_feature/presentation/blocs/auth_bloc/auth_state.dart';
@@ -21,34 +22,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(UnauthenticatedState());
         return;
       }
-
       try {
-        // If offline, check if we should force logout
-        if (/* check offline status */) {
-          final lastOnlineDate = AppConst.lastOnlineDate;
-          final currentDate = DateTime.now();
-
-          if (lastOnlineDate != null && currentDate.difference(lastOnlineDate).inDays > 7) {
-            // Token expired due to offline limit
-            AppConst.apiToken = null;  // Clear token
-            emit(UnauthenticatedState());
-            return;
-          }
-
-          // Still within 7 days, remain authenticated
-          emit(AuthenticatedState(/* retrieve user details from local */));
-          return;
-        }
-
-        // Check online for valid token
-        final user = await getUserUseCase(apiToken);
-        // Save last online date
+        UserEntity userEntity = await getUserUseCase.userRepository.getUser(apiToken);
         AppConst.lastOnlineDate = DateTime.now();
-
-        emit(AuthenticatedState(user));
-      } catch (e) {
-        // Error occurred, assume unauthenticated
-        emit(UnauthenticatedState());
+        emit(AuthenticatedState());
+      } on DioException catch (e) {
+        // Unauthenticated api token
+        if (e.response?.statusCode == 405) {
+          emit(UnauthenticatedState());
+        }
+        if (e.type == DioExceptionType.connectionError) {
+          var currentDate = DateTime.now();
+          final lastOnlineDate = AppConst.lastOnlineDate;
+          var lastOnlineDateDifferenceBool = lastOnlineDate != null &&
+              currentDate.difference(lastOnlineDate).inDays > 30;
+          if (lastOnlineDateDifferenceBool) {
+            // Token expired due to offline limit
+            AppConst.apiTokenToNull(); // Clear token
+            emit(UnauthenticatedState());
+          } else {
+            emit(AuthenticatedState());
+          }
+        }
       }
     });
 
