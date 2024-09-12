@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user_entity.g.dart';
+@JsonSerializable()
 class UserEntity extends Equatable {
   final int id;
   final String username;
@@ -18,6 +21,11 @@ class UserEntity extends Equatable {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  factory UserEntity.fromJson(Map<String, dynamic> json) => _$UserEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserEntityToJson(this);
+
 
   @override
   List<Object?> get props => [id, email];
