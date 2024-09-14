@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:emendo/core/utils/user_preferences.dart';
 import 'package:emendo/features/auth_feature/domain/entities/user_entity.dart';
 import 'package:emendo/features/auth_feature/domain/use_cases/get_user_usecase.dart';
 import 'package:emendo/core/utils/app_const.dart';
@@ -23,9 +24,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return;
       }
       try {
-        UserEntity userEntity = await getUserUseCase.userRepository.getUser(apiToken);
+        UserEntity? userEntity =await UserPreferences.getUser();
         AppConst.lastOnlineDate = DateTime.now();
-        emit(AuthenticatedState());
+        emit(AuthenticatedState(userEntity!));
       } on DioException catch (e) {
         // Unauthenticated api token
         if (e.response?.statusCode == 405) {
@@ -41,7 +42,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             AppConst.apiTokenToNull(); // Clear token
             emit(UnauthenticatedState());
           } else {
-            emit(AuthenticatedState());
+            UserEntity? userEntity =await UserPreferences.getUser();
+
+            emit(AuthenticatedState(userEntity!));
           }
         }
       }

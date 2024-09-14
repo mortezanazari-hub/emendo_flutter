@@ -6,13 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserPreferences {
   static const String userKey = 'user_key';
 
-  Future<void> saveUser(UserEntity user) async {
+ static Future<void> saveUser(UserEntity user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String userJson = jsonEncode(user.toJson());
     await prefs.setString(userKey, userJson);
   }
 
-  Future<UserEntity?> getUser() async {
+  static Future<UserEntity?> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userJson = prefs.getString(userKey);
 
@@ -24,7 +24,7 @@ class UserPreferences {
     return null;
   }
 
-  Future<void> clearUser() async {
+ static Future<void> clearUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(userKey);
   }
