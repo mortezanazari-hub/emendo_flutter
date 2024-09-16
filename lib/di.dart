@@ -12,6 +12,7 @@ import 'package:emendo/features/auth_feature/domain/use_cases/get_user_usecase.d
 import 'package:emendo/features/auth_feature/domain/use_cases/login_user_usecase.dart';
 import 'package:emendo/features/auth_feature/domain/use_cases/register_user_usecase.dart';
 import 'package:emendo/features/auth_feature/domain/use_cases/verify_email_usecase.dart';
+import 'package:emendo/features/auth_feature/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:emendo/features/auth_feature/presentation/blocs/login_cubit/login_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -40,6 +41,8 @@ setup() {
   
   ///bloc
   locator.registerSingleton<LoginCubit>(LoginCubit(locator()));
+  locator.registerSingleton<AuthBloc>(AuthBloc(locator()));
+
  // locator.registerSingleton<LoginState>(LoginSuccess(locator()));
   
 

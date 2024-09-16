@@ -20,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (apiToken == null) {
         // Unauthenticated: no token found
+        await UserPreferences.clearUser();
         emit(UnauthenticatedState());
         return;
       }
@@ -30,6 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } on DioException catch (e) {
         // Unauthenticated api token
         if (e.response?.statusCode == 405) {
+          await UserPreferences.clearUser();
           emit(UnauthenticatedState());
         }
         if (e.type == DioExceptionType.connectionError) {
@@ -39,7 +41,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               currentDate.difference(lastOnlineDate).inDays > 30;
           if (lastOnlineDateDifferenceBool) {
             // Token expired due to offline limit
-            AppConst.apiTokenToNull(); // Clear token
+            await UserPreferences.clearUser();
             emit(UnauthenticatedState());
           } else {
             UserEntity? userEntity =await UserPreferences.getUser();
