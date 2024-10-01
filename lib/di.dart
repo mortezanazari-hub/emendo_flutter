@@ -1,50 +1,68 @@
-import 'package:emendo/features/auth_feature/data/api_provider/api_provider.dart';
-import 'package:emendo/features/auth_feature/data/repository/login_repository_impl.dart';
-import 'package:emendo/features/auth_feature/data/repository/register_repository_impl.dart';
-import 'package:emendo/features/auth_feature/data/repository/user_repository_impl.dart';
-import 'package:emendo/features/auth_feature/data/repository/verify_email_repository_impl.dart';
-import 'package:emendo/features/auth_feature/domain/entities/login_entity.dart';
-import 'package:emendo/features/auth_feature/domain/repositories/login_repository.dart';
-import 'package:emendo/features/auth_feature/domain/repositories/register_repository.dart';
-import 'package:emendo/features/auth_feature/domain/repositories/user_repository.dart';
-import 'package:emendo/features/auth_feature/domain/repositories/verify_email_repository.dart';
-import 'package:emendo/features/auth_feature/domain/use_cases/get_user_usecase.dart';
-import 'package:emendo/features/auth_feature/domain/use_cases/login_user_usecase.dart';
-import 'package:emendo/features/auth_feature/domain/use_cases/register_user_usecase.dart';
-import 'package:emendo/features/auth_feature/domain/use_cases/verify_email_usecase.dart';
-import 'package:emendo/features/auth_feature/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:emendo/features/auth_feature/presentation/blocs/login_cubit/login_cubit.dart';
+import 'package:dio/dio.dart';
+import 'package:emendo/features/auth/data/repository/auth_repositroy_impl.dart';
+import 'package:emendo/features/auth/domain/repository/auth_repository.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'config/dio_interceptor.dart';
+import 'config/shared_oprator.dart';
+import 'core/utils/app_const.dart';
+import 'features/auth/data/remote/api_provider.dart';
+import 'features/auth/domain/usecase/login_usecase.dart';
+import 'features/auth/domain/usecase/register_usecase.dart';
+import 'features/auth/domain/usecase/validate_email_usecase.dart';
 
 GetIt locator = GetIt.instance;
 
-setup() {
-  ///api provider
-  locator.registerSingleton<ApiProvider>(ApiProvider());
+ Future<void> setup() async{
+   Dio dio = Dio(
+     BaseOptions(
+       // connectTimeout: const Duration(seconds: 20),
+       // receiveTimeout: const Duration(seconds: 20),
+       // sendTimeout: const Duration(seconds: 20),
+       baseUrl: AppConst.apiBase,
+     ),
+   );
+   dio.interceptors.add(DioInterceptor(dio));
+   locator.registerSingleton<Dio>(dio);
 
+   ///shared operator (sharedPreference)
+   locator.registerSingleton<SharedPrefOperator>(SharedPrefOperator(await SharedPreferences.getInstance()));
+
+   ///api provider
+  // locator.registerSingleton<ApiProvider>(ApiProvider());
+  locator.registerSingleton<AuthApiProvider>(AuthApiProvider(dio));
 
 
   ///repositories
-  locator.registerSingleton<LoginRepository>(LoginRepositoryImpl(locator()));
-  locator.registerSingleton<RegisterRepository>(RegisterRepositoryImpl(locator()));
-  locator.registerSingleton<UserRepository>(UserRepositoryImpl(locator()));
-  locator.registerSingleton<ValidateEmailRepository>(ValidateEmailRepositoryImpl(locator()));
+  // locator.registerSingleton<LoginRepository>(LoginRepositoryImpl(locator()));
+  // locator.registerSingleton<RegisterRepository>(RegisterRepositoryImpl(locator()));
+  // locator.registerSingleton<UserRepository>(UserRepositoryImpl(locator()));
+  // locator.registerSingleton<ValidateEmailRepository>(ValidateEmailRepositoryImpl(locator()));
+  locator.registerSingleton<AuthRepository>(AuthRepositoryImpl());
 
 
-  ///usecase
-  locator.registerSingleton<GetUserUseCase>(GetUserUseCase(locator()));
-  locator.registerSingleton<LoginUseCase>(LoginUseCase(locator()));
-  locator.registerSingleton<RegisterUseCase>(RegisterUseCase(locator()));
-  locator.registerSingleton<ValidateEmailUseCase>(ValidateEmailUseCase(locator()));
-  
-  
-  
-  ///bloc
-  locator.registerSingleton<LoginCubit>(LoginCubit(locator()));
-  locator.registerSingleton<AuthBloc>(AuthBloc(locator()));
+
+   ///usecase
+  // locator.registerSingleton<GetUserUseCase>(GetUserUseCase(locator()));
+  locator.registerSingleton<ValidateEmailUseCase>(ValidateEmailUseCase());
+  locator.registerSingleton<LoginUseCase>(LoginUseCase());
+  locator.registerSingleton<RegisterUseCase>(RegisterUseCase());
+
+
+
+
+
+   ///bloc
+  // locator.registerSingleton<LoginCubit>(LoginCubit(locator()));
+  // locator.registerSingleton<AuthBloc>(AuthBloc(locator()));
 
  // locator.registerSingleton<LoginState>(LoginSuccess(locator()));
-  
+
+
+
+
+
+
 
 
 }
