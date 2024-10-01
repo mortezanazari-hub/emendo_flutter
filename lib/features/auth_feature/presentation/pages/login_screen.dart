@@ -27,8 +27,8 @@ class LoginScreen extends StatelessWidget {
       child: Builder(builder: (context) {
         TextEditingController emailController = TextEditingController();
         TextEditingController passwordController = TextEditingController();
-        return BlocListener<AuthBloc,AuthState>(
-          listener: (context,state){
+        return BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
             print(state.toString());
             if (state is UnauthenticatedState) {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -45,7 +45,6 @@ class LoginScreen extends StatelessWidget {
             body: BlocListener<LoginCubit, LoginState>(
               listener: (context, state) {
                 if (state is LoginSuccess) {
-
                   //todo: delete this line
                   if (kDebugMode) {
                     Future.delayed(const Duration(seconds: 1), () {
@@ -54,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                   }
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                     SnackBar(content: Text(state.loginEntity.data)),
+                    SnackBar(content: Text(state.loginEntity.data)),
                   );
                 } else if (state is LoginError) {
                   //todo: delete this line
@@ -65,7 +64,8 @@ class LoginScreen extends StatelessWidget {
                   }
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.loginEntity.success.toString())),
+                    SnackBar(
+                        content: Text(state.loginEntity.success.toString())),
                   );
                 }
               },
@@ -137,6 +137,18 @@ class LoginScreen extends StatelessWidget {
                                 );
                           },
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        AppButton(
+                            text: "test",
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text(
+                                        "apiToken is: ${AppConst.apiToken}")),
+                              );
+                            }),
                         SizedBox(height: AppConst.standardPadding * 0.1),
                         Padding(
                           padding:
@@ -149,7 +161,8 @@ class LoginScreen extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context)
                                       .pushReplacement(MaterialPageRoute(
-                                    builder: (context) => const RegisterScreen(),
+                                    builder: (context) =>
+                                        const RegisterScreen(),
                                   ));
                                 },
                               ),
@@ -175,7 +188,9 @@ class LoginScreen extends StatelessWidget {
                             // const Spacer(),
                             SvgPicture.asset(
                               "lib/core/resources/svg/Google_G_logo.svg",
-                              color: AppConst.disabledColor,
+                              colorFilter: const ColorFilter.mode(
+                                  AppConst.disabledColor, BlendMode.saturation),
+                              // color: AppConst.disabledColor,
                             ),
                             const SizedBox(width: 10),
                             GestureDetector(

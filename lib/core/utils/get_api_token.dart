@@ -6,9 +6,3 @@ class GetApiToken {
     return prefs.getString('api_token');
   }
 }
-// class SetPrefs {
-//   static Future<T> call(String) async{
-//     final prefs = await SharedPreferences.getInstance();
-//     return prefs.
-//   }
-// }
