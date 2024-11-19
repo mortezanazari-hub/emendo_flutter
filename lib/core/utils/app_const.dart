@@ -38,4 +38,5 @@ class AppConst {
   static const Color mainColor = Color(0xff479b2c);
   static const Color secondColor = Color(0xffffffff);
   static const Color disabledColor = Color(0xffbabfcd);
+  static const Color indigoColor = Color(0xFF1C2135);
 }
