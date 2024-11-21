@@ -1,7 +1,6 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/widgets/app_button.dart';
 import 'package:emendo/core/widgets/app_link_text.dart';
-import 'package:emendo/core/widgets/app_title_description.dart';
 import 'package:emendo/features/auth/presentation/pages/register_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -23,11 +22,13 @@ class _Verification_ScreenState extends State<Verification_Screen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: InkWell(onTap: () {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => const RegisterScreen(),
-          ));
-        }, child: const Icon(Icons.arrow_back)),
+        leading: InkWell(
+            onTap: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const RegisterScreen(),
+              ));
+            },
+            child: const Icon(Icons.arrow_back)),
 
         //titleSpacing: AppConst.screenWidth * 0.1,
         title: const Text(
@@ -37,7 +38,7 @@ class _Verification_ScreenState extends State<Verification_Screen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: AppConst.standardPadding *3),
+            SizedBox(height: AppConst.standardPadding * 3),
             Row(
               children: [
                 const Spacer(),
@@ -69,10 +70,9 @@ class _Verification_ScreenState extends State<Verification_Screen> {
             Text(
               "namo352@gmail.com",
               style: TextStyle(
-                fontSize: AppConst.standardDescriptionFontSize,
-                color: Colors.black87,
-                fontWeight: FontWeight.w600
-              ),
+                  fontSize: AppConst.standardDescriptionFontSize,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w600),
             ),
             SizedBox(
               height: AppConst.standardPadding,
@@ -102,24 +102,25 @@ class _Verification_ScreenState extends State<Verification_Screen> {
               ),
             ),
             SizedBox(height: AppConst.standardPadding),
-            AppButton(text: "Submit", onPressed: () {
-              showModalBottomSheet(
-                  backgroundColor: Colors.white,
-                  useSafeArea: true,
-                  constraints: BoxConstraints(
-                    maxHeight: AppConst.screenHeight * .7,
-                    minHeight: 295,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(AppConst.standardPadding)),
-                  ),
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const RegisterSuccessModal();
-                  });
-
-            }),
+            AppButton(
+                text: "Submit",
+                onPressed: () {
+                  showModalBottomSheet(
+                      backgroundColor: Colors.white,
+                      useSafeArea: true,
+                      constraints: BoxConstraints(
+                        maxHeight: AppConst.screenHeight * .7,
+                        minHeight: 295,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(AppConst.standardPadding)),
+                      ),
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const RegisterSuccessModal();
+                      });
+                }),
             SizedBox(height: AppConst.standardPadding),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

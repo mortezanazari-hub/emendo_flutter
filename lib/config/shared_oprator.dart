@@ -1,14 +1,12 @@
-
-import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class SharedPrefOperator {
   final SharedPreferences sharedPreferences;
+
   SharedPrefOperator(this.sharedPreferences);
 
   /// auth
-   setUserToken(token) {
+  setUserToken(token) {
     sharedPreferences.setString("token", token);
     sharedPreferences.setBool("loggedIn", true);
   }
@@ -20,15 +18,18 @@ class SharedPrefOperator {
   getUserRefreshToken() {
     return sharedPreferences.getString("refreshToken") ?? "";
   }
+
   /// ========
 
   /// intro
   bool getIntroState() {
     return sharedPreferences.getBool("shouldShowIntro") ?? false;
   }
+
   saveIntroState() {
     sharedPreferences.setBool("shouldShowIntro", false);
   }
+
   /// ========
 
   changeChooseState() {

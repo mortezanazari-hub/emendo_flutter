@@ -1,4 +1,3 @@
-import 'package:emendo/core/utils/app_const.dart';
 import 'package:flutter/material.dart';
 
 class ResultIcon extends StatefulWidget {
