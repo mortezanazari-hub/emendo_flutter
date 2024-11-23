@@ -39,4 +39,12 @@ class AppConst {
   static const Color secondColor = Color(0xffffffff);
   static const Color disabledColor = Color(0xffbabfcd);
   static const Color indigoColor = Color(0xFF1C2135);
+
+  static const Color color1 = Color(0xffF7FFF7);
+  static const Color color2 = Color(0xffDDFFDF);
+  static const Color color3 = Color(0xffC2FFC7);
+  static const Color color4 = Color(0xff9EDF9C);
+  static const Color color5 = Color(0xff526E48);
+  static const Color color6 = Color(0xff30402A);
+  static const Color color7 = Color(0xff0E120C);
 }

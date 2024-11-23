@@ -1,23 +1,29 @@
 import 'package:emendo/features/tasks/data/model/task_model.dart';
 
 class TestDbTasks {
+  static final todayTime =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  static final tomorrowTime = todayTime.add(Duration(days: 1));
+  static final tomorrowTime2 = todayTime.add(Duration(days: 2));
+  static final yesterdayTime = todayTime.add(Duration(days: -1));
   static final taskList = {
     TaskModel("Task Name 1",
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.low,
-        dueDate: DateTime(2024, 11, 21),
+        dueDate: todayTime,
         hasNotifications: true,
         notificationType: NotificationType.both,
         repeatedTask: true,
-        taskDescription: "${DateTime(2024, 11, 21)} | low",
+        taskDescription: "$todayTime | low",
         repeatedTaskPeriod: RepeatedTaskPeriod.daily),
     TaskModel("Task Name 2",
         specificTime: true,
         taskType: TaskType.onDay,
-        taskPriority: TaskPriority.high,
-        dueDate: DateTime(2024, 11, 21),
-        taskDescription: "${DateTime(2024, 11, 21)} | high",
+        taskPriority: TaskPriority.low,
+        dueDate: yesterdayTime,
+        taskDescription:
+            "in yek matn tozihat boland hast ke bish az tedade mojaz kalameh dare, karbordesh baraye karbar ine ke ye seri mozakhraf tosh beneviseh",
         hasNotifications: true,
         notificationType: NotificationType.both,
         repeatedTask: true,
@@ -26,8 +32,8 @@ class TestDbTasks {
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.medium,
-        dueDate: DateTime(2024, 11, 21),
-        taskDescription: "${DateTime(2024, 11, 21)} | medium",
+        dueDate: todayTime,
+        taskDescription: "$todayTime | medium",
         hasNotifications: false,
         notificationType: NotificationType.both,
         repeatedTask: true,
@@ -52,8 +58,8 @@ class TestDbTasks {
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.high,
-        taskDescription: "${DateTime(2024, 11, 22)} | high",
-        dueDate: DateTime(2024, 11, 22)),
+        taskDescription: "$tomorrowTime | high",
+        dueDate: tomorrowTime),
     TaskModel(
       "Task Name 5",
       taskPriority: TaskPriority.low,
@@ -62,7 +68,7 @@ class TestDbTasks {
       "Task Name 6",
       taskPriority: TaskPriority.medium,
       specificTime: false,
-      dueDate: DateTime(2024, 11, 21),
+      dueDate: todayTime,
     ),
     TaskModel(
       "Task Name 7",
@@ -72,13 +78,13 @@ class TestDbTasks {
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.medium,
-        taskDescription: "${DateTime(2024, 11, 23)} | medium",
-        dueDate: DateTime(2024, 11, 23)),
+        taskDescription: "$tomorrowTime | medium",
+        dueDate: tomorrowTime),
     TaskModel("Task Name 9",
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.low,
-        taskDescription: "${DateTime(2024, 11, 22)} | low",
-        dueDate: DateTime(2024, 11, 22)),
+        taskDescription: "$tomorrowTime2 | low",
+        dueDate: tomorrowTime2),
   };
 }
