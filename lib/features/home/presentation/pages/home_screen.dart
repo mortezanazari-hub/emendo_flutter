@@ -57,11 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppConst.color1,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
                 /// start header
@@ -95,14 +95,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Hi, $_userFullName",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: AppConst.color7),
+                              color: AppConst.color6),
                         ), //name
                         const Text(
                           "Lets do your best!",
                           style: TextStyle(
                               fontSize: 12.0,
                               fontWeight: FontWeight.w300,
-                              color: AppConst.color6),
+                              color: AppConst.color5),
                         ), //motto description
                       ],
                     )
@@ -113,52 +113,68 @@ class _HomeScreenState extends State<HomeScreen> {
                 /// start body
 
                 //space
-                SizedBox(height: 20),
+                SizedBox(height: 10),
 
                 //search bar
-                TextFormField(
-                  onChanged: (value) {
-                    //search logic goes here
-                  },
-                  style: TextStyle(color: AppConst.color6),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppConst.color3, width: 1),
-                      borderRadius: BorderRadius.circular(12.0),
+                SizedBox(
+                  height: 45,
+                  child: TextFormField(
+                    onChanged: (value) {
+                      //search logic goes here
+                    },
+                    style: TextStyle(color: AppConst.color5),
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: AppConst.color2, width: 1),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: AppConst.color2, width: 1),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: AppConst.color4, width: 1),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      hintText: "Search your task",
+                      hintStyle: TextStyle(
+                        color: AppConst.color4_5,
+                        fontSize: 14,
+                      ),
+                      suffixIcon: Icon(
+                        Icons.search,
+                        color: AppConst.color4_5,
+                        size: 18,
+                      ),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppConst.color3, width: 1),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppConst.color4, width: 1),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    hintText: "Search your task",
-                    hintStyle: TextStyle(color: AppConst.color5),
-                    suffixIcon: Icon(Icons.search, color: AppConst.color5),
                   ),
                 ),
 
                 //space
-                SizedBox(height: 20),
+                SizedBox(height: 10),
 
                 //Tasks list items
                 Row(children: [
+                  SizedBox(width: 10),
                   Text(
                     "Tasks",
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: AppConst.color7),
+                        fontWeight: FontWeight.bold,
+                        color: AppConst.color6,
+                        fontSize: 16),
                   ),
                   Spacer(),
                   //AppLinkText(text: "see more", onPressed: () {})
                 ]),
-                SizedBox(height: 8),
+                SizedBox(height: 5),
                 FilterButton(
                   initialFilter: _selectedFilter,
                   onFilterSelected: _onFilterSelected,
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 5),
 
                 //tasks list
                 ListView.builder(

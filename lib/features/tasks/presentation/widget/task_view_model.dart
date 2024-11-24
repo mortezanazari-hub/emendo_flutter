@@ -22,17 +22,21 @@ class _TaskWidgetState extends State<TaskWidget> {
   Widget build(BuildContext context) {
     final task = widget.task;
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 3),
+      margin: EdgeInsets.symmetric(vertical: 4),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(20),
         child: Container(
-          height: task.taskDescription != null ? 55 : 48,
-          decoration: BoxDecoration(color: AppConst.color2),
+          height: 75,
+          decoration: BoxDecoration(
+            color: AppConst.color1,
+            border: Border.all(color: AppConst.color2, width: 1),
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 10,
+                width: 15,
                 decoration: BoxDecoration(
                   color: task.taskPriority == TaskPriority.high
                       ? AppConst.color6
@@ -41,7 +45,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                           : AppConst.color4,
                 ),
               ),
-              SizedBox(width: 8),
+              SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +59,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                         Text(
                           task.taskName,
                           style: TextStyle(
-                            color: AppConst.color7,
+                            color: AppConst.color6,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -66,16 +70,16 @@ class _TaskWidgetState extends State<TaskWidget> {
                             IsToday.isToday(task.dueDate!))
                           Text(
                             "Today",
-                            style:
-                                TextStyle(fontSize: 7, color: AppConst.color5),
+                            style: TextStyle(
+                                fontSize: 7, color: AppConst.color4_5),
                           ),
                         if (task.specificTime == true &&
                             task.dueDate != null &&
                             !IsToday.isToday(task.dueDate!))
                           Text(
                             "${task.dueDate!.day.toString().padLeft(2, '0')}/${task.dueDate!.month.toString().padLeft(2, '0')}",
-                            style:
-                                TextStyle(fontSize: 7, color: AppConst.color5),
+                            style: TextStyle(
+                                fontSize: 7, color: AppConst.color4_5),
                           ),
                         SizedBox(width: 2),
                         //repeat icon
@@ -83,7 +87,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                           Icon(
                             Icons.repeat,
                             size: 10,
-                            color: AppConst.color5,
+                            color: AppConst.color4_5,
                           ),
                         SizedBox(width: 2),
                         //notification icon
@@ -91,11 +95,13 @@ class _TaskWidgetState extends State<TaskWidget> {
                           Icon(
                             Icons.notifications,
                             size: 10,
-                            color: AppConst.color5,
+                            color: AppConst.color4_5,
                           ),
                       ],
                     ),
+
                     //description
+                    if (task.taskDescription != null) SizedBox(height: 9),
                     if (task.taskDescription != null)
                       Text(
                         task.taskDescription!,
@@ -117,13 +123,17 @@ class _TaskWidgetState extends State<TaskWidget> {
                   SizedBox(width: 45),
                   task.subTasks.isEmpty
                       ? Checkbox(
-                          activeColor: AppConst.color5,
-                          checkColor: AppConst.color6,
-                          fillColor: WidgetStatePropertyAll(AppConst.color4),
+                          activeColor: AppConst.color4,
+                          checkColor: AppConst.color5,
+                          // fillColor: WidgetStatePropertyAll(AppConst.color4),
                           focusColor: AppConst.color3,
                           hoverColor: AppConst.color3,
+                          shape: CircleBorder(
+                            eccentricity: 0.5,
+                            //side: BorderSide(color: AppConst.color2, width: 1),
+                          ),
                           splashRadius: 20,
-                          side: BorderSide(color: AppConst.color4),
+                          side: BorderSide(color: AppConst.color4, width: 1),
                           value: task.isCompleted!,
                           onChanged: (status) {
                             setState(() {

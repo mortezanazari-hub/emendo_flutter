@@ -17,14 +17,14 @@ class FilterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30,
+      height: 35,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: FilterSearch.values.length,
         itemBuilder: (context, index) {
           final value = FilterSearch.values[index];
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2.0),
+            padding: const EdgeInsets.all(2.0),
             child: ElevatedButton(
               onPressed: () => onFilterSelected(value),
               style: ButtonStyle(
