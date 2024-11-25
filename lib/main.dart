@@ -1,6 +1,7 @@
 import 'package:emendo/di.dart';
 import 'package:emendo/features/auth/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:emendo/features/home/presentation/pages/home_screen.dart';
+import 'package:emendo/features/tasks/presentation/screen/task_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'EmenDo',
-      home: HomeScreen(),
+      home: TaskEditScreen(),
+      // home: HomeScreen(),
       // home: SplashScreen(),
     );
   }

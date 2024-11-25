@@ -1,5 +1,6 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/utils/filter_search.dart';
+import 'package:emendo/core/utils/subTaskCounter.dart';
 import 'package:emendo/core/widgets/app_link_text.dart';
 import 'package:emendo/features/tasks/data/local/test_db_tasks.dart';
 import 'package:emendo/features/tasks/data/model/task_model.dart';
@@ -35,23 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     sortTasks();
-  }
-
-  int countAllSubTasks(TaskModel task) {
-    int count = task.subTasks?.length ?? 0;
-    task.subTasks?.forEach((subTask) {
-      count += countAllSubTasks(subTask);
-    });
-    return count;
-  }
-
-  int countCompletedSubTasks(TaskModel task) {
-    int count = 0;
-    task.subTasks?.forEach((subTask) {
-      if (subTask.isCompleted == true) count++;
-      count += countCompletedSubTasks(subTask);
-    });
-    return count;
   }
 
   @override
@@ -95,14 +79,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           "Hi, $_userFullName",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: AppConst.color6),
+                              color: AppConst.color7),
                         ), //name
                         const Text(
                           "Lets do your best!",
                           style: TextStyle(
                               fontSize: 12.0,
                               fontWeight: FontWeight.w300,
-                              color: AppConst.color5),
+                              color: AppConst.color6),
                         ), //motto description
                       ],
                     )
@@ -122,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onChanged: (value) {
                       //search logic goes here
                     },
-                    style: TextStyle(color: AppConst.color5),
+                    style: TextStyle(color: AppConst.color6),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderSide:
@@ -141,12 +125,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       hintText: "Search your task",
                       hintStyle: TextStyle(
-                        color: AppConst.color4_5,
+                        color: AppConst.color5,
                         fontSize: 14,
                       ),
                       suffixIcon: Icon(
                         Icons.search,
-                        color: AppConst.color4_5,
+                        color: AppConst.color5,
                         size: 18,
                       ),
                     ),
@@ -163,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     "Tasks",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppConst.color6,
+                        color: AppConst.color7,
                         fontSize: 16),
                   ),
                   Spacer(),
@@ -183,8 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: TestDbTasks.taskList.length,
                   itemBuilder: (context, index) {
                     final task = sortedTasks.elementAt(index);
-                    final allTasksLength = countAllSubTasks(task);
-                    final completedTasksLength = countCompletedSubTasks(task);
+                    final allTasksLength =
+                        Subtaskcounter.countAllSubTasks(task);
+                    final completedTasksLength =
+                        Subtaskcounter.countCompletedSubTasks(task);
                     return TaskWidget(
                       task,
                       allTasksLength: allTasksLength,

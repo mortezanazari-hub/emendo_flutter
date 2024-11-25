@@ -1,4 +1,4 @@
-class IsToday {
+class IsDay {
   static bool isToday(DateTime date) {
     final now = DateTime.now();
     return date.year == now.year &&

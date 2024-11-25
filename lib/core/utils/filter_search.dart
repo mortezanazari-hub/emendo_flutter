@@ -38,7 +38,7 @@ class FilterButton extends StatelessWidget {
                 overlayColor: WidgetStatePropertyAll(AppConst.color2),
                 shadowColor: WidgetStatePropertyAll(AppConst.color4),
                 foregroundColor: WidgetStatePropertyAll(
-                  value == initialFilter ? AppConst.color6 : AppConst.color5,
+                  value == initialFilter ? AppConst.color7 : AppConst.color6,
                 ),
                 backgroundColor: WidgetStatePropertyAll(
                     value == initialFilter ? AppConst.color3 : AppConst.color1),

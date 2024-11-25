@@ -39,9 +39,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                 width: 15,
                 decoration: BoxDecoration(
                   color: task.taskPriority == TaskPriority.high
-                      ? AppConst.color6
+                      ? AppConst.color7
                       : task.taskPriority == TaskPriority.medium
-                          ? AppConst.color5
+                          ? AppConst.color6
                           : AppConst.color4,
                 ),
               ),
@@ -59,7 +59,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                         Text(
                           task.taskName,
                           style: TextStyle(
-                            color: AppConst.color6,
+                            color: AppConst.color7,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -67,19 +67,19 @@ class _TaskWidgetState extends State<TaskWidget> {
                         //calendar icon
                         if (task.specificTime == true &&
                             task.dueDate != null &&
-                            IsToday.isToday(task.dueDate!))
+                            IsDay.isToday(task.dueDate!))
                           Text(
                             "Today",
-                            style: TextStyle(
-                                fontSize: 7, color: AppConst.color4_5),
+                            style:
+                                TextStyle(fontSize: 7, color: AppConst.color5),
                           ),
                         if (task.specificTime == true &&
                             task.dueDate != null &&
-                            !IsToday.isToday(task.dueDate!))
+                            !IsDay.isToday(task.dueDate!))
                           Text(
                             "${task.dueDate!.day.toString().padLeft(2, '0')}/${task.dueDate!.month.toString().padLeft(2, '0')}",
-                            style: TextStyle(
-                                fontSize: 7, color: AppConst.color4_5),
+                            style:
+                                TextStyle(fontSize: 7, color: AppConst.color5),
                           ),
                         SizedBox(width: 2),
                         //repeat icon
@@ -87,7 +87,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                           Icon(
                             Icons.repeat,
                             size: 10,
-                            color: AppConst.color4_5,
+                            color: AppConst.color5,
                           ),
                         SizedBox(width: 2),
                         //notification icon
@@ -95,7 +95,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                           Icon(
                             Icons.notifications,
                             size: 10,
-                            color: AppConst.color4_5,
+                            color: AppConst.color5,
                           ),
                       ],
                     ),
@@ -106,7 +106,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                       Text(
                         task.taskDescription!,
                         style: TextStyle(
-                          color: AppConst.color5,
+                          color: AppConst.color6,
                           fontSize: 12,
                         ),
                         maxLines: 1,
@@ -124,7 +124,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                   task.subTasks.isEmpty
                       ? Checkbox(
                           activeColor: AppConst.color4,
-                          checkColor: AppConst.color5,
+                          checkColor: AppConst.color6,
                           // fillColor: WidgetStatePropertyAll(AppConst.color4),
                           focusColor: AppConst.color3,
                           hoverColor: AppConst.color3,
@@ -142,7 +142,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                           })
                       : Text(
                           "${widget.completedTasksLength}/${widget.allTasksLength}",
-                          style: TextStyle(color: AppConst.color6),
+                          style: TextStyle(color: AppConst.color7),
                         )
                 ],
               ),

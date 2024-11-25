@@ -41,7 +41,6 @@ class TestDbTasks {
         subTasks: {
           TaskModel("sub task 1"),
           TaskModel("sub task 2"),
-          TaskModel("sub task 3"),
           TaskModel("sub task 4", subTasks: {
             TaskModel("sub sub task 1"),
             TaskModel("sub sub task 2"),
