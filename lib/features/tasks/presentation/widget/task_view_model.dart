@@ -137,7 +137,7 @@ class _TaskWidgetState extends State<TaskWidget> {
                           ),
                           splashRadius: 20,
                           side: BorderSide(color: AppConst.color4, width: 1),
-                          value: task.isCompleted!,
+                          value: task.isCompleted,
                           onChanged: (status) {
                             setState(() {
                               task.isCompleted = status!;

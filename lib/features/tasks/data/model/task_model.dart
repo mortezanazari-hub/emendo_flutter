@@ -1,6 +1,6 @@
 class TaskModel {
   String taskName;
-  Set<TaskModel> subTasks;
+  List<TaskModel> subTasks = [];
   String? taskDescription;
   TaskPriority taskPriority;
   bool isCompleted;
@@ -13,8 +13,10 @@ class TaskModel {
   bool repeatedTask;
   RepeatedTaskPeriod repeatedTaskPeriod;
 
-  TaskModel(this.taskName,
-      {this.subTasks = const {},
+  TaskModel(
+      this.taskName,
+      {
+        required this.subTasks,
       this.taskDescription,
       this.taskPriority = TaskPriority.medium,
       this.isCompleted = false,
@@ -25,7 +27,8 @@ class TaskModel {
       this.hasNotifications = false,
       this.notificationType = NotificationType.both,
       this.repeatedTask = false,
-      this.repeatedTaskPeriod = RepeatedTaskPeriod.daily});
+      this.repeatedTaskPeriod = RepeatedTaskPeriod.daily,
+      });
 
   DateTime? get effectiveDueDate {
     if (specificTime && dueDate != null) {

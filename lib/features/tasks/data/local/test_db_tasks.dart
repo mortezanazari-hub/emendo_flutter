@@ -40,16 +40,13 @@ class TestDbTasks {
         repeatedTaskPeriod: RepeatedTaskPeriod.daily,
         subTasks: {
           TaskModel("sub task 1",
-              taskPriority: TaskPriority.high,
               taskDescription:
                   "in yek tozihat hast baraye sub task ha ta ertefa ro test konim"),
-          TaskModel("sub task 2", taskPriority: TaskPriority.medium),
-          TaskModel("sub task 3", taskPriority: TaskPriority.low, subTasks: {
+          TaskModel("sub task 2"),
+          TaskModel("sub task 4", subTasks: {
             TaskModel("sub sub task 1"),
             TaskModel("sub sub task 2"),
-            TaskModel(
-              "sub sub task 3",
-            ),
+            TaskModel("sub sub task 3"),
             TaskModel("sub sub task 4", subTasks: {
               TaskModel("sub sub sub task 1"),
               TaskModel("sub sub sub task 2"),

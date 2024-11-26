@@ -54,6 +54,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
           padding: EdgeInsets.all(10),
           child: Column(
             children: [
+
               MyStyleTextFormField(
                   labelText: "Task Name",
                   hintText: "Task Name",
@@ -68,9 +69,12 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                 maxLines: 5,
                 minLines: 3,
               ),
+
+
               SizedBox(
                 height: 10,
               ),
+
               ContainerWithLabel(
                 label: "Sub Tasks",
                 child: SubTasks(task: task),
