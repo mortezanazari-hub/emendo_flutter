@@ -41,24 +41,23 @@ class _SubTasksState extends State<SubTasks> {
               fontSize: 14,
             ),
           ),
-        if (widget.task.subTasks.isNotEmpty)
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: widget.task.subTasks.length,
-            itemBuilder: (context, index) {
-              final subTask = widget.task.subTasks.elementAt(index);
-              final allTasksLength = Subtaskcounter.countAllSubTasks(subTask);
-              final completedTasksLength =
-                  Subtaskcounter.countCompletedSubTasks(subTask);
-              return TaskWidget(
-                height: 50,
-                subTask,
-                allTasksLength: allTasksLength,
-                completedTasksLength: completedTasksLength,
-              );
-            },
-          ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: widget.task.subTasks.length,
+          itemBuilder: (context, index) {
+            final subTask = widget.task.subTasks.elementAt(index);
+            final allTasksLength = Subtaskcounter.countAllSubTasks(subTask);
+            final completedTasksLength =
+                Subtaskcounter.countCompletedSubTasks(subTask);
+            return TaskWidget(
+              height: 50,
+              subTask,
+              allTasksLength: allTasksLength,
+              completedTasksLength: completedTasksLength,
+            );
+          },
+        ),
         if (_addTaskShow) SizedBox(height: 10),
         if (_addTaskShow)
           MyStyleTextFormField(
@@ -68,7 +67,8 @@ class _SubTasksState extends State<SubTasks> {
               if (_addTaskController.text.isEmpty) return;
               setState(() {
                 _addTaskShow = false;
-                widget.task.subTasks.add(TaskModel(_addTaskController.text));
+
+                widget.task.subTasks.add(TaskModel(_addTaskController.text, subTasks: []));
                 _addTaskController.clear();
               });
             },

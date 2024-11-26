@@ -16,7 +16,7 @@ class TestDbTasks {
         notificationType: NotificationType.both,
         repeatedTask: true,
         taskDescription: "$todayTime | low",
-        repeatedTaskPeriod: RepeatedTaskPeriod.daily),
+        repeatedTaskPeriod: RepeatedTaskPeriod.daily, subTasks: []),
     TaskModel("Task Name 2",
         specificTime: true,
         taskType: TaskType.onDay,
@@ -27,7 +27,7 @@ class TestDbTasks {
         hasNotifications: true,
         notificationType: NotificationType.both,
         repeatedTask: true,
-        repeatedTaskPeriod: RepeatedTaskPeriod.daily),
+        repeatedTaskPeriod: RepeatedTaskPeriod.daily, subTasks: []),
     TaskModel("Task Name 3",
         specificTime: true,
         taskType: TaskType.onDay,
@@ -38,54 +38,54 @@ class TestDbTasks {
         notificationType: NotificationType.both,
         repeatedTask: true,
         repeatedTaskPeriod: RepeatedTaskPeriod.daily,
-        subTasks: {
+        subTasks: [
           TaskModel("sub task 1",
               taskDescription:
-                  "in yek tozihat hast baraye sub task ha ta ertefa ro test konim"),
-          TaskModel("sub task 2"),
-          TaskModel("sub task 4", subTasks: {
-            TaskModel("sub sub task 1"),
-            TaskModel("sub sub task 2"),
-            TaskModel("sub sub task 3"),
-            TaskModel("sub sub task 4", subTasks: {
-              TaskModel("sub sub sub task 1"),
-              TaskModel("sub sub sub task 2"),
-              TaskModel("sub sub sub task 3", isCompleted: true),
-              TaskModel("sub sub sub task 4")
-            })
-          })
-        }),
+                  "in yek tozihat hast baraye sub task ha ta ertefa ro test konim", subTasks: []),
+          TaskModel("sub task 2", subTasks: []),
+          TaskModel("sub task 4", subTasks: [
+            TaskModel("sub sub task 1", subTasks: []),
+            TaskModel("sub sub task 2", subTasks: []),
+            TaskModel("sub sub task 3", subTasks: []),
+            TaskModel("sub sub task 4", subTasks: [
+              TaskModel("sub sub sub task 1", subTasks: []),
+              TaskModel("sub sub sub task 2", subTasks: []),
+              TaskModel("sub sub sub task 3", isCompleted: true, subTasks: []),
+              TaskModel("sub sub sub task 4", subTasks: [])
+            ])
+          ])
+        ]),
     TaskModel("Task Name 4",
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.high,
         taskDescription: "$tomorrowTime | high",
-        dueDate: tomorrowTime),
+        dueDate: tomorrowTime, subTasks: []),
     TaskModel(
       "Task Name 5",
-      taskPriority: TaskPriority.low,
+      taskPriority: TaskPriority.low, subTasks: [],
     ),
     TaskModel(
       "Task Name 6",
       taskPriority: TaskPriority.medium,
       specificTime: false,
-      dueDate: todayTime,
+      dueDate: todayTime, subTasks: [],
     ),
     TaskModel(
       "Task Name 7",
-      taskPriority: TaskPriority.high,
+      taskPriority: TaskPriority.high, subTasks: [],
     ),
     TaskModel("Task Name 8",
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.medium,
         taskDescription: "$tomorrowTime | medium",
-        dueDate: tomorrowTime),
+        dueDate: tomorrowTime, subTasks: []),
     TaskModel("Task Name 9",
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.low,
         taskDescription: "$tomorrowTime2 | low",
-        dueDate: tomorrowTime2),
+        dueDate: tomorrowTime2, subTasks: []),
   };
 }
