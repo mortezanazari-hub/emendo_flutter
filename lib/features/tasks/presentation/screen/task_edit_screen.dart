@@ -1,8 +1,10 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/utils/subTaskCounter.dart';
+import 'package:emendo/core/widgets/container_with_label.dart';
 import 'package:emendo/core/widgets/line_with_icon_clip_path.dart';
 import 'package:emendo/core/widgets/my_style_text_form_field.dart';
 import 'package:emendo/features/tasks/data/model/task_model.dart';
+import 'package:emendo/features/tasks/presentation/widget/sub_tasks.dart';
 import 'package:emendo/features/tasks/presentation/widget/task_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +22,11 @@ class TaskEditScreen extends StatefulWidget {
 }
 
 class _TaskEditScreenState extends State<TaskEditScreen> {
+  late bool _showAdvancedOptions;
+
   @override
   Widget build(BuildContext context) {
+    _showAdvancedOptions = false;
     final task = widget.task;
     return Scaffold(
       backgroundColor: AppConst.color0,
@@ -52,89 +57,54 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
               SizedBox(
                 height: 10,
               ),
-              ContainerWithLabel(task: task)
+              ContainerWithLabel(
+                label: "Sub Tasks",
+                child: SubTasks(task: task),
+              ),
+              // SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                      child: Container(
+                    height: 2,
+                    color: AppConst.color2,
+                  )),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        _showAdvancedOptions = !_showAdvancedOptions;
+                      });
+                    },
+                    child: Text(
+                      _showAdvancedOptions
+                          ? "Show Advanced Options"
+                          : "Hide Advanced Options",
+                      style: TextStyle(
+                        color: AppConst.color5,
+                        fontSize: 10,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              if (_showAdvancedOptions) SizedBox(height: 10),
+              if (_showAdvancedOptions)
+                ContainerWithLabel(
+                  label: "Advanced Options",
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 200,
+                        width: 200,
+                        color: Colors.blue,
+                      )
+                    ],
+                  ),
+                )
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class ContainerWithLabel extends StatelessWidget {
-  const ContainerWithLabel({
-    super.key,
-    required this.task,
-  });
-
-  final TaskModel task;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              border: Border.all(color: AppConst.color2),
-              borderRadius: BorderRadius.circular(20)),
-          child: SubTasks(task: task),
-        ),
-        Positioned(
-          top: -8,
-          left: 5,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            color: AppConst.color0,
-            child: Text(
-              "Sub Tasks",
-              style: TextStyle(
-                color: AppConst.color5,
-                fontSize: 10,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SubTasks extends StatelessWidget {
-  const SubTasks({
-    super.key,
-    required this.task,
-  });
-
-  final TaskModel task;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (task.subTasks.isNotEmpty)
-          ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: task.subTasks.length,
-            itemBuilder: (context, index) {
-              final subTask = task.subTasks.elementAt(index);
-              final allTasksLength = Subtaskcounter.countAllSubTasks(subTask);
-              final completedTasksLength =
-                  Subtaskcounter.countCompletedSubTasks(subTask);
-              return TaskWidget(
-                subTask,
-                allTasksLength: allTasksLength,
-                completedTasksLength: completedTasksLength,
-              );
-            },
-          ),
-        SizedBox(height: 10),
-        LineWithIcon(
-          onTap: () {},
-        ),
-      ],
     );
   }
 }

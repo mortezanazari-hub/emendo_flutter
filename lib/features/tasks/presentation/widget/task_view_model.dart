@@ -7,11 +7,13 @@ class TaskWidget extends StatefulWidget {
   final TaskModel task;
   final int allTasksLength;
   final int completedTasksLength;
+  final double? height;
 
   const TaskWidget(this.task,
       {required this.allTasksLength,
       required this.completedTasksLength,
-      super.key});
+      super.key,
+      this.height});
 
   @override
   _TaskWidgetState createState() => _TaskWidgetState();
@@ -21,12 +23,13 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     final task = widget.task;
+    final height = widget.height;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          height: 75,
+          height: height ?? 75,
           decoration: BoxDecoration(
             color: AppConst.color1,
             border: Border.all(color: AppConst.color2, width: 1),
@@ -51,7 +54,6 @@ class _TaskWidgetState extends State<TaskWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // SizedBox(height: 8),
                     //task name and icons
                     Row(
                       children: [
@@ -101,7 +103,8 @@ class _TaskWidgetState extends State<TaskWidget> {
                     ),
 
                     //description
-                    if (task.taskDescription != null) SizedBox(height: 9),
+                    if (task.taskDescription != null)
+                      SizedBox(height: height == null ? 9 : 0),
                     if (task.taskDescription != null)
                       Text(
                         task.taskDescription!,
