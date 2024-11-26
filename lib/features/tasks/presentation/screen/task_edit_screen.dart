@@ -23,11 +23,25 @@ class TaskEditScreen extends StatefulWidget {
 
 class _TaskEditScreenState extends State<TaskEditScreen> {
   late bool _showAdvancedOptions;
+  late TaskPriority _selectedPriority;
+
+  @override
+  void initState() {
+    _showAdvancedOptions = true;
+    _selectedPriority = TaskPriority.medium;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    _showAdvancedOptions = false;
     final task = widget.task;
+    final TextStyle advancedOptionsTitle = TextStyle(
+        color: AppConst.color6, fontWeight: FontWeight.bold, fontSize: 15);
+    final underLineInputBorder = UnderlineInputBorder(
+        borderSide: BorderSide(
+      color: AppConst.color5,
+      width: 2,
+    ));
     return Scaffold(
       backgroundColor: AppConst.color0,
       appBar: AppBar(
@@ -77,8 +91,8 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                     },
                     child: Text(
                       _showAdvancedOptions
-                          ? "Show Advanced Options"
-                          : "Hide Advanced Options",
+                          ? "Hide Advanced Options"
+                          : "Show Advanced Options",
                       style: TextStyle(
                         color: AppConst.color5,
                         fontSize: 10,
@@ -93,11 +107,55 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
                   label: "Advanced Options",
                   child: Column(
                     children: [
-                      Container(
-                        height: 200,
-                        width: 200,
-                        color: Colors.blue,
-                      )
+                      Row(
+                        children: [
+                          Text(
+                            "Priority",
+                            style: advancedOptionsTitle,
+                          ),
+                          Spacer(),
+                          Expanded(
+                            child: DropdownButtonFormField<TaskPriority>(
+                              value: _selectedPriority,
+                              focusColor: AppConst.color2,
+                              dropdownColor: AppConst.color2,
+                              alignment: Alignment.center,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: AppConst.color7,
+                                        width: 4,
+                                      ),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  contentPadding: EdgeInsets.only(left: 10),
+                                  focusColor: AppConst.color7,
+                                  hoverColor: AppConst.color2,
+                                  fillColor: AppConst.color1,
+                                  filled: true,
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide.none),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide.none)),
+                              style: TextStyle(
+                                color: AppConst.color6,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                              onChanged: (TaskPriority? newValue) {
+                                setState(() {
+                                  _selectedPriority = newValue!;
+                                });
+                              },
+                              items:
+                                  TaskPriority.values.map((TaskPriority value) {
+                                return DropdownMenuItem<TaskPriority>(
+                                  value: value,
+                                  child: Text(value.toString()),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 )

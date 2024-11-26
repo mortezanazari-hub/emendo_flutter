@@ -57,11 +57,25 @@ class TaskModel {
       }
     }
 
-    return this.taskPriority.index.compareTo(other.taskPriority.index);
+    return this.taskPriority.value.compareTo(other.taskPriority.value);
   }
 }
 
-enum TaskPriority { high, medium, low }
+class TaskPriority {
+  final String name;
+  final int value;
+
+  const TaskPriority._(this.name, this.value);
+
+  static const low = TaskPriority._('Low', 1);
+  static const medium = TaskPriority._('Medium', 2);
+  static const high = TaskPriority._('High', 3);
+
+  static List<TaskPriority> get values => [low, medium, high];
+
+  @override
+  String toString() => name;
+}
 
 enum TaskType { onDay, onHour, event }
 
