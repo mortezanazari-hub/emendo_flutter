@@ -7,7 +7,7 @@ class TestDbTasks {
   static final tomorrowTime2 = todayTime.add(Duration(days: 2));
   static final yesterdayTime = todayTime.add(Duration(days: -1));
   static final taskList = {
-    TaskModel("Task Name 1",
+    TaskModel("Task Name 1", [],
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.low,
@@ -17,7 +17,7 @@ class TestDbTasks {
         repeatedTask: true,
         taskDescription: "$todayTime | low",
         repeatedTaskPeriod: RepeatedTaskPeriod.daily),
-    TaskModel("Task Name 2",
+    TaskModel("Task Name 2", [],
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.low,
@@ -28,7 +28,8 @@ class TestDbTasks {
         notificationType: NotificationType.both,
         repeatedTask: true,
         repeatedTaskPeriod: RepeatedTaskPeriod.daily),
-    TaskModel("Task Name 3",
+    TaskModel(
+        "Task Name 3",
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.medium,
@@ -38,50 +39,55 @@ class TestDbTasks {
         notificationType: NotificationType.both,
         repeatedTask: true,
         repeatedTaskPeriod: RepeatedTaskPeriod.daily,
-        subTasks: {
-          TaskModel("sub task 1",
+        [
+          TaskModel("sub task 1", [],
               taskDescription:
                   "in yek tozihat hast baraye sub task ha ta ertefa ro test konim"),
-          TaskModel("sub task 2"),
-          TaskModel("sub task 4", subTasks: {
-            TaskModel("sub sub task 1"),
-            TaskModel("sub sub task 2"),
-            TaskModel("sub sub task 3"),
-            TaskModel("sub sub task 4", subTasks: {
-              TaskModel("sub sub sub task 1"),
-              TaskModel("sub sub sub task 2"),
-              TaskModel("sub sub sub task 3", isCompleted: true),
-              TaskModel("sub sub sub task 4")
-            })
-          })
-        }),
-    TaskModel("Task Name 4",
+          TaskModel("sub task 2", []),
+          TaskModel("sub task 4", [
+            TaskModel("sub sub task 1", []),
+            TaskModel("sub sub task 2", []),
+            TaskModel("sub sub task 3", []),
+            TaskModel("sub sub task 4", [
+              TaskModel("sub sub sub task 1", []),
+              TaskModel("sub sub sub task 2", []),
+              TaskModel("sub sub sub task 3", isCompleted: true, []),
+              TaskModel("sub sub sub task 4", [])
+            ])
+          ])
+        ]),
+    TaskModel(
+        "Task Name 4",
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.high,
         taskDescription: "$tomorrowTime | high",
-        dueDate: tomorrowTime),
+        dueDate: tomorrowTime,
+        []),
     TaskModel(
       "Task Name 5",
       taskPriority: TaskPriority.low,
+      [],
     ),
     TaskModel(
       "Task Name 6",
       taskPriority: TaskPriority.medium,
       specificTime: false,
       dueDate: todayTime,
+      [],
     ),
     TaskModel(
       "Task Name 7",
       taskPriority: TaskPriority.high,
+      [],
     ),
-    TaskModel("Task Name 8",
+    TaskModel("Task Name 8", [],
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.medium,
         taskDescription: "$tomorrowTime | medium",
         dueDate: tomorrowTime),
-    TaskModel("Task Name 9",
+    TaskModel("Task Name 9", [],
         specificTime: true,
         taskType: TaskType.onDay,
         taskPriority: TaskPriority.low,

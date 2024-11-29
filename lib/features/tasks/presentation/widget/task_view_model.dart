@@ -61,6 +61,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                         Text(
                           task.taskName,
                           style: TextStyle(
+                            decoration: task.isCompleted
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
                             color: AppConst.color7,
                             fontWeight: FontWeight.bold,
                           ),
@@ -128,13 +131,8 @@ class _TaskWidgetState extends State<TaskWidget> {
                       ? Checkbox(
                           activeColor: AppConst.color4,
                           checkColor: AppConst.color6,
-                          // fillColor: WidgetStatePropertyAll(AppConst.color4),
                           focusColor: AppConst.color3,
                           hoverColor: AppConst.color3,
-                          shape: CircleBorder(
-                            eccentricity: 0.5,
-                            //side: BorderSide(color: AppConst.color2, width: 1),
-                          ),
                           splashRadius: 20,
                           side: BorderSide(color: AppConst.color4, width: 1),
                           value: task.isCompleted,

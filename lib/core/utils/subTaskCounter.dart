@@ -2,7 +2,7 @@ import 'package:emendo/features/tasks/data/model/task_model.dart';
 
 class Subtaskcounter {
   static int countAllSubTasks(TaskModel task) {
-    int count = task.subTasks.length;
+    int count = task.subTasks.length ?? 0;
     for (var subTask in task.subTasks) {
       count += countAllSubTasks(subTask);
     }
@@ -11,7 +11,7 @@ class Subtaskcounter {
 
   static int countCompletedSubTasks(TaskModel task) {
     int count = 0;
-    for (var subTask in task.subTasks) {
+    for (var subTask in task.subTasks!) {
       if (subTask.isCompleted == true) count++;
       count += countCompletedSubTasks(subTask);
     }

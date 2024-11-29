@@ -12,23 +12,24 @@ class TaskModel {
   NotificationType notificationType;
   bool repeatedTask;
   RepeatedTaskPeriod repeatedTaskPeriod;
+  int? customDayBetween;
 
   TaskModel(
-      this.taskName,
-      {
-        required this.subTasks,
-      this.taskDescription,
-      this.taskPriority = TaskPriority.medium,
-      this.isCompleted = false,
-      this.specificTime = false,
-      this.taskType = TaskType.onDay,
-      this.dueDate,
-      this.endEvent,
-      this.hasNotifications = false,
-      this.notificationType = NotificationType.both,
-      this.repeatedTask = false,
-      this.repeatedTaskPeriod = RepeatedTaskPeriod.daily,
-      });
+    this.taskName,
+    this.subTasks, {
+    this.taskDescription,
+    this.taskPriority = TaskPriority.medium,
+    this.isCompleted = false,
+    this.specificTime = false,
+    this.taskType = TaskType.onDay,
+    DateTime? dueDate,
+    this.endEvent,
+    this.hasNotifications = false,
+    this.notificationType = NotificationType.push,
+    this.repeatedTask = false,
+    this.repeatedTaskPeriod = RepeatedTaskPeriod.daily,
+    this.customDayBetween = 2,
+  }) : dueDate = dueDate ?? DateTime.now();
 
   DateTime? get effectiveDueDate {
     if (specificTime && dueDate != null) {
@@ -60,7 +61,7 @@ class TaskModel {
       }
     }
 
-    return this.taskPriority.value.compareTo(other.taskPriority.value);
+    return taskPriority.value.compareTo(other.taskPriority.value);
   }
 }
 
@@ -80,23 +81,80 @@ class TaskPriority {
   String toString() => name;
 }
 
-enum TaskType { onDay, onHour, event }
+class TaskType {
+  final String name;
+  final int value;
 
-enum NotificationType { email, push, both }
+  const TaskType._(this.name, this.value);
 
-enum RepeatedTaskPeriod {
-  daily,
-  weekly,
-  monthly,
-  saturdays,
-  sundays,
-  mondays,
-  tuesdays,
-  wednesdays,
-  thursdays,
-  fridays,
-  fridaysAndThursdays,
-  fridaysAndSaturdays,
-  saturdaysAndSundays,
-  everyCustomDayBetween
+  static const onDay = TaskType._('Whole of day', 1);
+  static const onHour = TaskType._('On Time', 2);
+  static const event = TaskType._('Is a event', 3);
+
+  static List<TaskType> get values => [onDay, onHour, event];
+
+  @override
+  String toString() => name;
+}
+
+class NotificationType {
+  final String name;
+  final int value;
+
+  const NotificationType._(this.name, this.value);
+
+  static const email = NotificationType._('Send Email', 1);
+  static const push = NotificationType._('Push Notification', 2);
+  static const both = NotificationType._('Both', 3);
+
+  static List<NotificationType> get values => [email, push, both];
+
+  @override
+  String toString() => name;
+}
+
+class RepeatedTaskPeriod {
+  final String name;
+  final int value;
+
+  const RepeatedTaskPeriod._(this.name, this.value);
+
+  static const daily = RepeatedTaskPeriod._('Daily', 1);
+  static const weekly = RepeatedTaskPeriod._('Weekly', 2);
+  static const monthly = RepeatedTaskPeriod._('Monthly', 3);
+  static const saturdays = RepeatedTaskPeriod._('Saturdays', 4);
+  static const sundays = RepeatedTaskPeriod._('Sundays', 5);
+  static const mondays = RepeatedTaskPeriod._('Mondays', 6);
+  static const tuesdays = RepeatedTaskPeriod._('Tuesdays', 7);
+  static const wednesdays = RepeatedTaskPeriod._('Wednesdays', 8);
+  static const thursdays = RepeatedTaskPeriod._('Thursdays', 9);
+  static const fridays = RepeatedTaskPeriod._('Fridays', 10);
+  static const fridaysAndThursdays =
+      RepeatedTaskPeriod._('Fridays and Thursdays', 11);
+  static const fridaysAndSaturdays =
+      RepeatedTaskPeriod._('Fridays and Saturdays', 12);
+  static const saturdaysAndSundays =
+      RepeatedTaskPeriod._('Saturdays and Sundays', 13);
+  static const everyCustomDayBetween =
+      RepeatedTaskPeriod._('Custom Day Between', 14);
+
+  static List<RepeatedTaskPeriod> get values => [
+        daily,
+        weekly,
+        monthly,
+        saturdays,
+        sundays,
+        mondays,
+        tuesdays,
+        wednesdays,
+        thursdays,
+        fridays,
+        fridaysAndThursdays,
+        fridaysAndSaturdays,
+        saturdaysAndSundays,
+        everyCustomDayBetween
+      ];
+
+  @override
+  String toString() => name;
 }
