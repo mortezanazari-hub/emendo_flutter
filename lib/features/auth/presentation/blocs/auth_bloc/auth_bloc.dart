@@ -37,6 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       ///--- emailValidation
       if(event is ValidationEmailEvent){
+        emit(ValidationEmailLoading());
         DataState dataState = await locator<ValidateEmailUseCase>().call(param: event.code);
         dataState is DataSuccess
             ? emit(ValidationEmailSuccess(validateEmailEntity: dataState.data))

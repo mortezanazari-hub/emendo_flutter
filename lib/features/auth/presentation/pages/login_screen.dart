@@ -24,15 +24,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  AuthBloc bloc = AuthBloc();
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+  late AuthBloc bloc;
 
   @override
   void initState() {
     super.initState();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    bloc = AuthBloc();
   }
 
   @override
@@ -40,39 +41,13 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     emailController.dispose();
     passwordController.dispose();
+    bloc.close();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
-      // body: BlocListener<LoginCubit, LoginState>(
-      //   listener: (context, state) {
-      //     if (state is LoginSuccess) {
-      //       //todo: delete this line
-      //       if (kDebugMode) {
-      //         Future.delayed(const Duration(seconds: 1), () {
-      //           print("api_token is: ${AppConst.apiToken}");
-      //         });
-      //       }
-      //
-      //       ScaffoldMessenger.of(context).showSnackBar(
-      //         SnackBar(content: Text(state.loginEntity.data)),
-      //       );
-      //     } else if (state is LoginFailed) {
-      //       //todo: delete this line
-      //       if (kDebugMode) {
-      //         Future.delayed(const Duration(seconds: 1), () {
-      //           print("error is: ${state.loginEntity.data}");
-      //         });
-      //       }
-      //
-      //       ScaffoldMessenger.of(context).showSnackBar(
-      //         SnackBar(
-      //             content: Text(state.loginEntity.success.toString())),
-      //       );
-      //     }
-      //   },
         body: SingleChildScrollView(
           child: SafeArea(
             child: Column(

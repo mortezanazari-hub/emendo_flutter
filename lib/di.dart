@@ -20,6 +20,7 @@ GetIt locator = GetIt.instance;
        // receiveTimeout: const Duration(seconds: 20),
        // sendTimeout: const Duration(seconds: 20),
        baseUrl: AppConst.apiBase,
+       connectTimeout: Duration(seconds: 10)
      ),
    );
    dio.interceptors.add(DioInterceptor(dio));

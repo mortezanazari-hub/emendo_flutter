@@ -19,11 +19,12 @@ class AuthApiProvider {
   }
 
   callRegister(RegisterParam registerParam) async {
-    var response = await dio.post("/register", queryParameters: {
-      "name": registerParam.name,
+    Response response = await dio.post("/register", queryParameters: {
+      "username": registerParam.name,
       "email": registerParam.email,
       "password": registerParam.password,
     });
+    print(response);
     return response;
   }
 

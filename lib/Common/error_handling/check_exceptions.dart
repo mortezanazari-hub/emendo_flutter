@@ -12,6 +12,8 @@ class CheckExceptions {
         return const DataFailed("Not Found");
       case 401:
         return DataFailed(response?.data['message'] ?? "Please Login again");
+      case 422:
+        return DataFailed(response?.data["message"] ?? "The Email Has Already Taken");
       case 500:
         return const DataFailed("Server is Not Responding,");
       default:
