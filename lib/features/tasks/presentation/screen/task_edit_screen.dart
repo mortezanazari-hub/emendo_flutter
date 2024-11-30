@@ -25,7 +25,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
   late TaskPriority _priority;
   late TaskType _type;
   late RepeatedTaskPeriod _period;
-  bool _advancedOptions = true;
+  bool _advancedOptions = false;
   final _dateController = BoardDateTimeController();
   final double optionsRowHeight = 50;
 
