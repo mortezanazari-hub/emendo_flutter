@@ -1,7 +1,6 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/utils/filter_search.dart';
 import 'package:emendo/core/utils/subTaskCounter.dart';
-import 'package:emendo/core/widgets/app_link_text.dart';
 import 'package:emendo/features/tasks/data/local/test_db_tasks.dart';
 import 'package:emendo/features/tasks/data/model/task_model.dart';
 import 'package:emendo/features/tasks/presentation/widget/task_view_model.dart';
@@ -168,9 +167,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, index) {
                     final task = sortedTasks.elementAt(index);
                     final allTasksLength =
-                        Subtaskcounter.countAllSubTasks(task);
+                        SubtaskCounter.countAllSubTasks(task);
                     final completedTasksLength =
-                        Subtaskcounter.countCompletedSubTasks(task);
+                        SubtaskCounter.countCompletedSubTasks(task);
                     return TaskWidget(
                       task,
                       allTasksLength: allTasksLength,

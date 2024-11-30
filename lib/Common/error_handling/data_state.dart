@@ -1,6 +1,7 @@
 class DataState<T> {
   final T? data;
   final String? message;
+
   const DataState(this.data, this.message);
 }
 
@@ -10,6 +11,8 @@ class DataSuccess<T> extends DataState<T> {
 }
 
 class DataFailed<T> extends DataState<T> {
+  // ignore: unused_field
   final String _message;
+
   const DataFailed(this._message) : super(null, _message);
 }

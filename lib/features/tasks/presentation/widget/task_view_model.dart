@@ -1,5 +1,6 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/utils/is_today.dart';
+import 'package:emendo/core/widgets/my_style_checkbox.dart';
 import 'package:emendo/features/tasks/data/model/task_model.dart';
 import 'package:flutter/material.dart';
 
@@ -128,15 +129,9 @@ class _TaskWidgetState extends State<TaskWidget> {
                 children: [
                   SizedBox(width: 45),
                   task.subTasks.isEmpty
-                      ? Checkbox(
-                          activeColor: AppConst.color4,
-                          checkColor: AppConst.color6,
-                          focusColor: AppConst.color3,
-                          hoverColor: AppConst.color3,
-                          splashRadius: 20,
-                          side: BorderSide(color: AppConst.color4, width: 1),
+                      ? myStyleCheckbox(
                           value: task.isCompleted,
-                          onChanged: (status) {
+                          onChange: (status) {
                             setState(() {
                               task.isCompleted = status!;
                             });

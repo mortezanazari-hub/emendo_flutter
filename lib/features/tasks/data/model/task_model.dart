@@ -39,6 +39,7 @@ class TaskModel {
   }
 
   @override
+  // ignore: override_on_non_overriding_member
   int compareTo(TaskModel other) {
     if (specificTime != other.specificTime) {
       return specificTime ? -1 : 1;

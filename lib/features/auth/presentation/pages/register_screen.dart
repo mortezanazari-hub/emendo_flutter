@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/widgets/app_button.dart';
 import 'package:emendo/core/widgets/app_input_text.dart';
@@ -19,7 +21,7 @@ class RegisterScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
           child:
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const SizedBox(height: 40),
             const AppTitleDescription(
               title: "Create Account",
@@ -56,7 +58,7 @@ class RegisterScreen extends StatelessWidget {
                 ));
               },
             ),
-            SizedBox(height: AppConst.standardPadding*0.5),
+            SizedBox(height: AppConst.standardPadding * 0.5),
             Padding(
               padding: EdgeInsets.only(right: AppConst.standardPadding),
               child: Row(

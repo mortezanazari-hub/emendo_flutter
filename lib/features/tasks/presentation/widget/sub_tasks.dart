@@ -33,7 +33,7 @@ class _SubTasksState extends State<SubTasks> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (widget.task.subTasks!.isEmpty)
+        if (widget.task.subTasks.isEmpty)
           Text(
             "There are no subtasks here. You can create one.",
             style: TextStyle(
@@ -44,12 +44,12 @@ class _SubTasksState extends State<SubTasks> {
         ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: widget.task.subTasks!.length ?? 0,
+          itemCount: widget.task.subTasks.length,
           itemBuilder: (context, index) {
-            final subTask = widget.task.subTasks!.elementAt(index);
-            final allTasksLength = Subtaskcounter.countAllSubTasks(subTask);
+            final subTask = widget.task.subTasks.elementAt(index);
+            final allTasksLength = SubtaskCounter.countAllSubTasks(subTask);
             final completedTasksLength =
-                Subtaskcounter.countCompletedSubTasks(subTask);
+                SubtaskCounter.countCompletedSubTasks(subTask);
             return TaskWidget(
               height: 50,
               subTask,
@@ -68,7 +68,7 @@ class _SubTasksState extends State<SubTasks> {
               setState(() {
                 _addTaskShow = false;
 
-                widget.task.subTasks!
+                widget.task.subTasks
                     .add(TaskModel(_addTaskController.text, []));
                 _addTaskController.clear();
               });
