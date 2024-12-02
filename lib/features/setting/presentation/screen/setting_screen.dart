@@ -115,14 +115,21 @@ class _SettingScreenState extends State<SettingScreen> {
                 ///quick appearance
                 SectionBox(
                   children: <Widget>[
+                    SizedBox(height: 10),
+
                     ///Dark Mode
                     SettingRow(
                       middleWidget: AppSettingTitleText("Dark Mode"),
                       setIcon: SetIcon(icon: Icons.dark_mode),
                       endWidget: Switch(
+                          trackOutlineWidth: WidgetStatePropertyAll(1),
+                          trackOutlineColor:
+                              WidgetStatePropertyAll(AppConst.color3),
                           value: isDarkMode,
-                          inactiveThumbColor: AppConst.color6,
-                          inactiveTrackColor: AppConst.color2,
+                          inactiveThumbColor: AppConst.color5,
+                          inactiveTrackColor: AppConst.color1,
+                          thumbColor: WidgetStatePropertyAll(AppConst.color5),
+                          activeColor: AppConst.color4,
                           onChanged: (value) {
                             setState(() {
                               isDarkMode = !isDarkMode;
@@ -136,6 +143,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       setIcon: SetIcon(icon: Icons.language),
                       endWidget: Expanded(
                         child: myStyleDropdownButtonFormField(
+                          isDense: true,
                           value: languageSelected,
                           onChanged: (val) {
                             if (languageSelected != val) {
@@ -155,6 +163,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       setIcon: SetIcon(icon: Icons.format_paint),
                       endWidget: Expanded(
                         child: myStyleDropdownButtonFormField(
+                          isDense: true,
                           value: colorSchemeSelected,
                           onChanged: (val) {
                             if (colorSchemeSelected != val) {
@@ -178,6 +187,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 /// Paged Settings
                 SectionBox(
                   children: [
+                    SizedBox(height: 10),
+
                     ///Appearance row
                     SettingRow(
                       onTap: () {},
@@ -215,6 +226,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 /// about box
                 SectionBox(
                   children: [
+                    SizedBox(height: 10),
+
                     ///send us message row
                     SettingRow(
                       onTap: () {},
@@ -346,7 +359,7 @@ class SetIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(2.5),
+      padding: EdgeInsets.all(2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: AppConst.color2,
@@ -372,7 +385,7 @@ class SectionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Ink(
       decoration: BoxDecoration(
         color: AppConst.color1,
         borderRadius: BorderRadius.circular(20),
@@ -406,24 +419,25 @@ class SettingRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(20),
-      hoverColor: AppConst.color2,
-      focusColor: AppConst.color2,
+      autofocus: true,
+      canRequestFocus: true,
+      hoverColor: AppConst.color5,
+      focusColor: AppConst.color5,
       mouseCursor: MouseCursor.uncontrolled,
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.only(top: 10, right: 10, left: 10),
+        padding: EdgeInsets.only(top: 10, right: 10, left: 10, bottom: 10),
         child: Row(
           children: <Widget>[
             ///Icon
             setIcon,
-
             SizedBox(width: 10),
 
             ///Middle row
             middleWidget,
             Spacer(),
 
-            ///Go to page
+            ///end widget
             endWidget
           ],
         ),

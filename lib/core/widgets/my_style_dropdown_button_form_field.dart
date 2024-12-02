@@ -2,6 +2,7 @@ import 'package:emendo/core/utils/app_const.dart';
 import 'package:flutter/material.dart';
 
 DropdownButtonFormField<T> myStyleDropdownButtonFormField<T>({
+  bool? isDense = false,
   required T value,
   OutlineInputBorder? inputBorder,
   required ValueChanged<T?> onChanged,
@@ -12,6 +13,7 @@ DropdownButtonFormField<T> myStyleDropdownButtonFormField<T>({
       borderRadius: BorderRadius.circular(20));
   return DropdownButtonFormField<T>(
     value: value,
+    isDense: isDense!,
     decoration: InputDecoration(
         border: inputBorder,
         contentPadding: const EdgeInsets.only(left: 10),
