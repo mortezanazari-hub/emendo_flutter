@@ -1,9 +1,9 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/widgets/app_button.dart';
-import 'package:emendo/features/auth/presentation/pages/first_auth_screen.dart';
 import 'package:emendo/features/auth/presentation/widgets/result_icon.dart';
-import 'package:emendo/features/home/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../../main/presentation/pages/home_screen.dart';
 
 class RegisterSuccessModal extends StatelessWidget {
   const RegisterSuccessModal({super.key});

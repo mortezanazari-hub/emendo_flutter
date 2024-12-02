@@ -69,7 +69,7 @@ class _SubTasksState extends State<SubTasks> {
                 _addTaskShow = false;
 
                 widget.task.subTasks
-                    .add(TaskModel(_addTaskController.text, []));
+                    .add(TaskModel(1,_addTaskController.text, []));
                 _addTaskController.clear();
               });
             },

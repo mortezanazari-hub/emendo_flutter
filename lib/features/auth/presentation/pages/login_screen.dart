@@ -9,11 +9,11 @@ import 'package:emendo/di.dart';
 import 'package:emendo/features/auth/domain/entities/auth_entity.dart';
 import 'package:emendo/features/auth/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:emendo/features/auth/presentation/pages/register_screen.dart';
-import 'package:emendo/features/home/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../main/presentation/pages/home_screen.dart';
 import '../widgets/forget_password_modal.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -152,15 +152,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  AppButton(
-                      text: "test",
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              content: Text(
-                                  "apiToken is: ${locator<SharedPrefOperator>().getUserToken()}")),
-                        );
-                      }),
                   SizedBox(height: AppConst.standardPadding * 0.1),
                   Padding(
                     padding:

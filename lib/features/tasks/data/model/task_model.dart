@@ -1,20 +1,43 @@
+import 'package:hive/hive.dart';
+
+part 'task_model.g.dart';
+
+
+@HiveType(typeId: 1)
 class TaskModel {
+  @HiveField(0)
+  int id;
+  @HiveField(1)
   String taskName;
+  @HiveField(2)
   List<TaskModel> subTasks = [];
+  @HiveField(3)
   String? taskDescription;
+  @HiveField(4)
   TaskPriority taskPriority;
+  @HiveField(5)
   bool isCompleted;
+  @HiveField(6)
   bool specificTime;
+  @HiveField(7)
   TaskType taskType;
+  @HiveField(8)
   DateTime? dueDate;
+  @HiveField(9)
   DateTime? endEvent;
+  @HiveField(10)
   bool hasNotifications;
+  @HiveField(11)
   NotificationType notificationType;
+  @HiveField(12)
   bool repeatedTask;
+  @HiveField(13)
   RepeatedTaskPeriod repeatedTaskPeriod;
+  @HiveField(14)
   int? customDayBetween;
 
   TaskModel(
+      this.id,
     this.taskName,
     this.subTasks, {
     this.taskDescription,
