@@ -49,4 +49,46 @@ class AppConst {
   static const Color color6 = Color(0xFF637D5B);
   static const Color color7 = Color(0xFF394834);
   static const Color color8 = Color(0xFF0E120C);
+
+  ///Language
+  static List<String> languageOptions = [
+    "English",
+    "Persian",
+    "Arabic",
+    "Russian",
+    "Spanish",
+    "Chinese",
+    "French",
+    "German",
+    "Japanese",
+    "Hindi",
+    "Portuguese",
+    "Italian",
+    "Korean",
+    "Turkish",
+    "Dutch",
+    "Swedish",
+    "Greek",
+    "Thai",
+    "Vietnamese",
+    "Indonesian",
+    "Polish",
+    "Ukrainian",
+    "Hebrew",
+    "Czech",
+    "Hungarian"
+  ];
+
+  ///Language
+  static List<String> colorSchemeOptions = [
+    "Default",
+    "Blue",
+    "Red",
+    "Yellow",
+    "Browne",
+    "Cyan",
+    "Orange",
+    "Purple",
+    "Pink",
+  ];
 }
