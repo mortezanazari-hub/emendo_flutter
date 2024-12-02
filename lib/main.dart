@@ -1,9 +1,7 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/di.dart';
 import 'package:emendo/features/auth/presentation/blocs/auth_bloc/auth_bloc.dart';
-import 'package:emendo/features/auth/presentation/pages/verification_screen.dart';
-import 'package:emendo/features/auth/presentation/widgets/register_success_modal.dart';
-import 'package:emendo/features/splash/screens/splash_screen.dart';
+import 'package:emendo/features/setting/presentation/screen/setting_screen.dart';
 import 'package:emendo/features/tasks/presentation/screen/task_edit_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +35,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'EmenDo',
-      home: SplashScreen(),
+      home: SettingScreen(),
+      //home: TaskEditScreen(),
       // home: HomeScreen(),
       // home: SplashScreen(),
     );
