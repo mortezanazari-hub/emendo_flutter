@@ -1,5 +1,13 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/widgets/my_style_dropdown_button_form_field.dart';
+import 'package:emendo/features/setting/presentation/screen/about_us_screen.dart';
+import 'package:emendo/features/setting/presentation/screen/appearance_screen.dart';
+import 'package:emendo/features/setting/presentation/screen/faqs_screen.dart';
+import 'package:emendo/features/setting/presentation/screen/notifications_screen.dart';
+import 'package:emendo/features/setting/presentation/screen/profile_edit.dart';
+import 'package:emendo/features/setting/presentation/screen/security_screen.dart';
+import 'package:emendo/features/setting/presentation/screen/send_us_message_screen.dart';
+import 'package:emendo/features/setting/presentation/screen/upgrade_screen.dart';
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -37,7 +45,13 @@ class _SettingScreenState extends State<SettingScreen> {
                 SectionBox(children: [
                   SizedBox(height: 10),
                   SettingRow(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ProfileEditScreen(),
+                          ),
+                        );
+                      },
                       middleWidget: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -83,7 +97,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
                   ///subscription row
                   SettingRow(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => UpgradeScreen(),
+                        ),
+                      );
+                    },
                     middleWidget: _textOfPro(),
                     setIcon: SetIcon(icon: Icons.attach_money),
                     endWidget: GoToPage(),
@@ -100,7 +120,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     SizedBox(height: 10),
 
                     ///Dark Mode
-
                     SettingRow(
                       middleWidget: AppSettingTitleText("Dark Mode"),
                       setIcon: SetIcon(icon: Icons.dark_mode),
@@ -178,7 +197,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
                     ///Appearance row
                     SettingRow(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AppearanceScreen(),
+                          ),
+                        );
+                      },
                       middleWidget: AppSettingTitleText("Appearance"),
                       setIcon: SetIcon(icon: Icons.format_size),
                       endWidget: GoToPage(),
@@ -186,7 +211,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
                     ///Security row
                     SettingRow(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => SecurityScreen(),
+                          ),
+                        );
+                      },
                       middleWidget: AppSettingTitleText("Security"),
                       setIcon: SetIcon(icon: Icons.security),
                       endWidget: GoToPage(),
@@ -194,7 +225,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
                     ///Notifications row
                     SettingRow(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => NotificationsScreen(),
+                          ),
+                        );
+                      },
                       middleWidget: AppSettingTitleText("Notifications"),
                       setIcon: SetIcon(icon: Icons.notifications),
                       endWidget: GoToPage(),
@@ -211,7 +248,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
                     ///send us message row
                     SettingRow(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => SendUsMessageScreen(),
+                          ),
+                        );
+                      },
                       middleWidget: AppSettingTitleText("Send us a message"),
                       setIcon: SetIcon(icon: Icons.send),
                       endWidget: GoToPage(),
@@ -219,7 +262,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
                     ///About us row
                     SettingRow(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AboutUsScreen(),
+                          ),
+                        );
+                      },
                       middleWidget: AppSettingTitleText("About us"),
                       setIcon: SetIcon(icon: Icons.info),
                       endWidget: GoToPage(),
@@ -227,7 +276,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
                     ///FAQ row
                     SettingRow(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => FaqsScreen(),
+                          ),
+                        );
+                      },
                       middleWidget: AppSettingTitleText("FAQs"),
                       setIcon: SetIcon(icon: Icons.question_answer),
                       endWidget: GoToPage(),
