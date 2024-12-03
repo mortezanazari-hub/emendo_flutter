@@ -199,7 +199,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
         SizedBox(height: optionsRowHeight),
         const Spacer(),
         Expanded(
-            child: myStyleDropdownButtonFormField(
+            child: MyStyleDropdownButtonFormField(
                 value: _priority,
                 onChanged: (newValue) => setState(() {
                       _priority = newValue!;
@@ -232,7 +232,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
         SizedBox(height: optionsRowHeight),
         const Spacer(),
         Expanded(
-            child: myStyleDropdownButtonFormField(
+            child: MyStyleDropdownButtonFormField(
                 value: _type,
                 onChanged: (newValue) => setState(() {
                       _type = newValue!;
@@ -378,7 +378,7 @@ class _TaskEditScreenState extends State<TaskEditScreen> {
         const Spacer(),
         Expanded(
           flex: 2,
-          child: myStyleDropdownButtonFormField(
+          child: MyStyleDropdownButtonFormField(
               value: _period,
               onChanged: (newValue) => setState(() {
                     _period = newValue!;

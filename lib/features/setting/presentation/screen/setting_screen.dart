@@ -35,79 +35,61 @@ class _SettingScreenState extends State<SettingScreen> {
               children: [
                 ///Profile Box
                 SectionBox(children: [
-                  Column(
-                    children: [
-                      ///Profile Row
-                      Container(
-                        padding:
-                            const EdgeInsets.only(left: 10, right: 10, top: 10),
-                        child: Row(
-                          children: <Widget>[
-                            ///avatar
-                            CircleAvatar(
-                              foregroundImage: AssetImage(_avatarAddress),
-                              radius: 16,
-                            ),
+                  SizedBox(height: 10),
+                  SettingRow(
+                      onTap: () {},
+                      middleWidget: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ///User Name
+                          Text(
+                            _name,
+                            style: TextStyle(
+                                color: AppConst.color7,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ),
+                          Row(
+                            children: [
+                              /// email address
+                              Text(
+                                _email,
+                                style: TextStyle(
+                                    color: AppConst.color7,
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 10),
+                              ),
 
-                            SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ///User Name
-                                Text(
-                                  _name,
-                                  style: TextStyle(
-                                      color: AppConst.color7,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                              ///Active or Not Active
+                              Text(
+                                !_verified
+                                    ? " (Not activated)"
+                                    : " (Activated)",
+                                style: TextStyle(
+                                  color:
+                                      !_verified ? Colors.red : AppConst.color4,
+                                  fontSize: 12,
                                 ),
-                                Row(
-                                  children: [
-                                    /// email address
-                                    Text(
-                                      _email,
-                                      style: TextStyle(
-                                          color: AppConst.color7,
-                                          fontWeight: FontWeight.w300,
-                                          fontSize: 10),
-                                    ),
-
-                                    ///Active or Not Active
-                                    Text(
-                                      !_verified
-                                          ? " (Not activated)"
-                                          : " (Activated)",
-                                      style: TextStyle(
-                                        color: !_verified
-                                            ? Colors.red
-                                            : AppConst.color4,
-                                        fontSize: 12,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Spacer(),
-
-                            ///Go to page
-                            GoToPage(onTapArrow: () {})
-                          ],
-                        ),
+                              )
+                            ],
+                          ),
+                        ],
                       ),
-
-                      ///subscription row
-                      SettingRow(
-                        middleWidget: _textOfPro(),
-                        setIcon: SetIcon(icon: Icons.attach_money),
-                        endWidget: GoToPage(
-                          onTapArrow: () {},
-                        ),
+                      setIcon: CircleAvatar(
+                        foregroundImage: AssetImage(_avatarAddress),
+                        radius: 16,
                       ),
+                      endWidget: GoToPage()),
 
-                      SizedBox(height: 10),
-                    ],
+                  ///subscription row
+                  SettingRow(
+                    onTap: () {},
+                    middleWidget: _textOfPro(),
+                    setIcon: SetIcon(icon: Icons.attach_money),
+                    endWidget: GoToPage(),
                   ),
+
+                  SizedBox(height: 10),
                 ]),
 
                 SizedBox(height: 10),
@@ -118,10 +100,13 @@ class _SettingScreenState extends State<SettingScreen> {
                     SizedBox(height: 10),
 
                     ///Dark Mode
+
                     SettingRow(
                       middleWidget: AppSettingTitleText("Dark Mode"),
                       setIcon: SetIcon(icon: Icons.dark_mode),
                       endWidget: Switch(
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
                           trackOutlineWidth: WidgetStatePropertyAll(1),
                           trackOutlineColor:
                               WidgetStatePropertyAll(AppConst.color3),
@@ -141,8 +126,9 @@ class _SettingScreenState extends State<SettingScreen> {
                     SettingRow(
                       middleWidget: AppSettingTitleText("Language"),
                       setIcon: SetIcon(icon: Icons.language),
-                      endWidget: Expanded(
-                        child: myStyleDropdownButtonFormField(
+                      endWidget: SizedBox(
+                        width: 120,
+                        child: MyStyleDropdownButtonFormField(
                           isDense: true,
                           value: languageSelected,
                           onChanged: (val) {
@@ -161,9 +147,10 @@ class _SettingScreenState extends State<SettingScreen> {
                     SettingRow(
                       middleWidget: AppSettingTitleText("Color Scheme"),
                       setIcon: SetIcon(icon: Icons.format_paint),
-                      endWidget: Expanded(
-                        child: myStyleDropdownButtonFormField(
-                          isDense: true,
+                      endWidget: SizedBox(
+                        width: 120,
+                        child: MyStyleDropdownButtonFormField(
+                          // isDense: false,
                           value: colorSchemeSelected,
                           onChanged: (val) {
                             if (colorSchemeSelected != val) {
@@ -194,9 +181,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       onTap: () {},
                       middleWidget: AppSettingTitleText("Appearance"),
                       setIcon: SetIcon(icon: Icons.format_size),
-                      endWidget: GoToPage(
-                        onTapArrow: () {},
-                      ),
+                      endWidget: GoToPage(),
                     ),
 
                     ///Security row
@@ -204,9 +189,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       onTap: () {},
                       middleWidget: AppSettingTitleText("Security"),
                       setIcon: SetIcon(icon: Icons.security),
-                      endWidget: GoToPage(
-                        onTapArrow: () {},
-                      ),
+                      endWidget: GoToPage(),
                     ),
 
                     ///Notifications row
@@ -214,9 +197,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       onTap: () {},
                       middleWidget: AppSettingTitleText("Notifications"),
                       setIcon: SetIcon(icon: Icons.notifications),
-                      endWidget: GoToPage(
-                        onTapArrow: () {},
-                      ),
+                      endWidget: GoToPage(),
                     ),
                     SizedBox(height: 10)
                   ],
@@ -233,9 +214,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       onTap: () {},
                       middleWidget: AppSettingTitleText("Send us a message"),
                       setIcon: SetIcon(icon: Icons.send),
-                      endWidget: GoToPage(
-                        onTapArrow: () {},
-                      ),
+                      endWidget: GoToPage(),
                     ),
 
                     ///About us row
@@ -243,9 +222,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       onTap: () {},
                       middleWidget: AppSettingTitleText("About us"),
                       setIcon: SetIcon(icon: Icons.info),
-                      endWidget: GoToPage(
-                        onTapArrow: () {},
-                      ),
+                      endWidget: GoToPage(),
                     ),
 
                     ///FAQ row
@@ -253,9 +230,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       onTap: () {},
                       middleWidget: AppSettingTitleText("FAQs"),
                       setIcon: SetIcon(icon: Icons.question_answer),
-                      endWidget: GoToPage(
-                        onTapArrow: () {},
-                      ),
+                      endWidget: GoToPage(),
                     ),
                     SizedBox(height: 10)
                   ],
@@ -314,7 +289,7 @@ class AppSettingTitleText extends StatelessWidget {
       overflow: TextOverflow.clip,
       title,
       style: TextStyle(
-        //fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.bold,
         color: AppConst.color7,
       ),
     );
@@ -323,11 +298,11 @@ class AppSettingTitleText extends StatelessWidget {
 
 ///Go to page
 class GoToPage extends StatelessWidget {
-  final VoidCallback onTapArrow;
+  final VoidCallback? onTapArrow;
 
   const GoToPage({
     super.key,
-    required this.onTapArrow,
+    this.onTapArrow,
   });
 
   @override
@@ -359,7 +334,7 @@ class SetIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(2),
+      padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: AppConst.color2,
@@ -370,7 +345,7 @@ class SetIcon extends StatelessWidget {
       ),
       child: Icon(
         icon,
-        size: 25,
+        // size: 25,
         color: AppConst.color6,
       ),
     );
