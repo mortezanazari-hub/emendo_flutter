@@ -1,15 +1,24 @@
 import 'package:emendo/core/utils/app_const.dart';
+import 'package:emendo/features/setting/data/local/fake_faq_db.dart';
+import 'package:emendo/features/setting/data/model/faq_model.dart';
 import 'package:emendo/features/setting/presentation/screen/setting_screen.dart';
 import 'package:flutter/material.dart';
 
 class FaqsScreen extends StatefulWidget {
-  const FaqsScreen({super.key});
+  FaqsScreen({super.key});
+
+  final List<FaqModel> faqList = FakeFaqDb.faqDb;
 
   @override
   State<FaqsScreen> createState() => _FaqsScreen();
 }
 
 class _FaqsScreen extends State<FaqsScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,13 +39,21 @@ class _FaqsScreen extends State<FaqsScreen> {
         title: Text('FAQs '),
       ),
       body: SingleChildScrollView(
-        child: SectionBox(padding: EdgeInsets.all(10), children: [
-          FaqItem(
-            question: "is Emendo is free?",
-            answer:
-                "In general, Emendo can be used for free, but the free version has limitations that you can remove for a very fair price and also help the developers to develop the software further.",
-          )
-        ]),
+        child: SectionBox(
+          padding: EdgeInsets.all(10),
+          children: [
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: widget.faqList.length,
+              itemBuilder: (context, index) {
+                return FaqItem(
+                  question: widget.faqList[index].question,
+                  answer: widget.faqList[index].answer,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -77,10 +94,18 @@ class _FaqItemState extends State<FaqItem> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        widget.question,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                      child: Text.rich(
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          TextSpan(children: [
+                            TextSpan(
+                              text: widget.question,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppConst.color6),
+                            )
+                          ])),
                     ),
                     Spacer(),
                     InkWell(
@@ -92,6 +117,7 @@ class _FaqItemState extends State<FaqItem> {
                       },
                       child: Icon(
                         !showAnswer ? Icons.add : Icons.remove,
+                        color: AppConst.color6,
                       ),
                     ),
                     SizedBox(width: 10)
