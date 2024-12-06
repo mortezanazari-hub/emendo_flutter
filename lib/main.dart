@@ -8,11 +8,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
+
   ///dependency injection
   await setup();
 
-  runApp(
-      const MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

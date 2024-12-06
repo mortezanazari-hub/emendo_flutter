@@ -1,4 +1,6 @@
 import 'package:emendo/core/utils/app_const.dart';
+import 'package:emendo/core/widgets/app_button.dart';
+import 'package:emendo/core/widgets/my_style_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class SendUsMessageScreen extends StatefulWidget {
@@ -9,6 +11,9 @@ class SendUsMessageScreen extends StatefulWidget {
 }
 
 class _SendUsMessageScreen extends State<SendUsMessageScreen> {
+  TextEditingController subjectController = TextEditingController();
+  TextEditingController messageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +33,27 @@ class _SendUsMessageScreen extends State<SendUsMessageScreen> {
         centerTitle: true,
         title: Text('Send a message to us'),
       ),
-      body: Center(
-        child: Text('send Screen'),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Center(
+            child: Column(
+          children: [
+            MyStyleTextFormField(
+              labelText: "Subject",
+              controller: subjectController,
+            ),
+            SizedBox(height: 10),
+            MyStyleTextFormField(
+              controller: messageController,
+              keyboardType: TextInputType.multiline,
+              maxLength: 500,
+              labelText: "Message",
+              maxLines: 4,
+            ),
+            SizedBox(height: 10),
+            AppButton(text: "send", onPressed: () {})
+          ],
+        )),
       ),
     );
   }

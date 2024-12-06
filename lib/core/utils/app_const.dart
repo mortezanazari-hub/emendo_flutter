@@ -34,6 +34,9 @@ class AppConst {
   static double standardTitleFontSize = screenWidth * 0.07;
   static double standardDescriptionFontSize = screenWidth * 0.03;
 
+  ///font size adder
+  static double plusFontSize = 0;
+
   ///colors:
   static const Color mainColor = Color(0xff479b2c);
   static const Color secondColor = Color(0xffffffff);
@@ -79,7 +82,7 @@ class AppConst {
     "Hungarian"
   ];
 
-  ///Language
+  ///colorScheme
   static List<String> colorSchemeOptions = [
     "Default",
     "Blue",
@@ -90,5 +93,20 @@ class AppConst {
     "Orange",
     "Purple",
     "Pink",
+  ];
+
+  ///Font list
+  static List<String> fontSelectOptions = [
+    "NauticaRounded",
+    "Roboto",
+    "Open Sans",
+    "Lato",
+    "Montserrat",
+    "Poppins",
+    "Arial",
+    "Helvetica",
+    "Times New Roman",
+    "Verdana",
+    "Georgia",
   ];
 }

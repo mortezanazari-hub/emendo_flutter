@@ -2,7 +2,6 @@ import 'package:hive/hive.dart';
 
 part 'task_model.g.dart';
 
-
 @HiveType(typeId: 1)
 class TaskModel {
   @HiveField(0)
@@ -37,7 +36,7 @@ class TaskModel {
   int? customDayBetween;
 
   TaskModel(
-      this.id,
+    this.id,
     this.taskName,
     this.subTasks, {
     this.taskDescription,
@@ -127,8 +126,8 @@ class NotificationType {
 
   const NotificationType._(this.name, this.value);
 
-  static const email = NotificationType._('Send Email', 1);
-  static const push = NotificationType._('Push Notification', 2);
+  static const email = NotificationType._('Email', 1);
+  static const push = NotificationType._('Push', 2);
   static const both = NotificationType._('Both', 3);
 
   static List<NotificationType> get values => [email, push, both];

@@ -1,13 +1,13 @@
 import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/widgets/my_style_dropdown_button_form_field.dart';
+import 'package:emendo/core/widgets/my_style_switch.dart';
+import 'package:emendo/core/widgets/my_style_text_form_field.dart';
 import 'package:emendo/features/setting/presentation/screen/about_us_screen.dart';
-import 'package:emendo/features/setting/presentation/screen/appearance_screen.dart';
 import 'package:emendo/features/setting/presentation/screen/faqs_screen.dart';
-import 'package:emendo/features/setting/presentation/screen/notifications_screen.dart';
 import 'package:emendo/features/setting/presentation/screen/profile_edit.dart';
-import 'package:emendo/features/setting/presentation/screen/security_screen.dart';
 import 'package:emendo/features/setting/presentation/screen/send_us_message_screen.dart';
 import 'package:emendo/features/setting/presentation/screen/upgrade_screen.dart';
+import 'package:emendo/features/tasks/data/model/task_model.dart';
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -18,6 +18,11 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  /// Display Boolean
+  bool _displayAppearanceOptions = false;
+  bool _displaySecurityOptions = false;
+  bool _displayNotificationOptions = false;
+
   ///fake data of user model
   final _name = "Morteza Nazari";
   final _email = "namo352@gmail.com";
@@ -26,10 +31,15 @@ class _SettingScreenState extends State<SettingScreen> {
   final isPro = true;
 
   ///fake setting options
-
+  bool usePasscode = false;
+  String passcode = "";
   bool isDarkMode = false;
+  NotificationType notificationTypeSelected = NotificationType.push;
+
   String languageSelected = AppConst.languageOptions[0];
   String colorSchemeSelected = AppConst.colorSchemeOptions[0];
+  String fontSelected = AppConst.fontSelectOptions[0];
+  TextEditingController passCodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -117,125 +127,243 @@ class _SettingScreenState extends State<SettingScreen> {
                 ///quick appearance
                 SectionBox(
                   children: <Widget>[
-                    SizedBox(height: 10),
-
-                    ///Dark Mode
-                    SettingRow(
-                      middleWidget: AppSettingTitleText("Dark Mode"),
-                      setIcon: SetIcon(icon: Icons.dark_mode),
-                      endWidget: Switch(
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          trackOutlineWidth: WidgetStatePropertyAll(1),
-                          trackOutlineColor:
-                              WidgetStatePropertyAll(AppConst.color3),
-                          value: isDarkMode,
-                          inactiveThumbColor: AppConst.color5,
-                          inactiveTrackColor: AppConst.color1,
-                          thumbColor: WidgetStatePropertyAll(AppConst.color5),
-                          activeColor: AppConst.color4,
-                          onChanged: (value) {
-                            setState(() {
-                              isDarkMode = !isDarkMode;
-                            });
-                          }),
-                    ),
-
-                    /// Language Select
-                    SettingRow(
-                      middleWidget: AppSettingTitleText("Language"),
-                      setIcon: SetIcon(icon: Icons.language),
-                      endWidget: SizedBox(
-                        width: 120,
-                        child: MyStyleDropdownButtonFormField(
-                          isDense: true,
-                          value: languageSelected,
-                          onChanged: (val) {
-                            if (languageSelected != val) {
-                              setState(() {
-                                languageSelected = val!;
-                              });
-                            }
-                          },
-                          items: AppConst.languageOptions,
-                        ),
-                      ),
-                    ),
-
-                    /// ColorScheme Select
-                    SettingRow(
-                      middleWidget: AppSettingTitleText("Color Scheme"),
-                      setIcon: SetIcon(icon: Icons.format_paint),
-                      endWidget: SizedBox(
-                        width: 120,
-                        child: MyStyleDropdownButtonFormField(
-                          // isDense: false,
-                          value: colorSchemeSelected,
-                          onChanged: (val) {
-                            if (colorSchemeSelected != val) {
-                              setState(() {
-                                colorSchemeSelected = val!;
-                              });
-                            }
-                          },
-                          items: AppConst.colorSchemeOptions,
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(height: 10),
-
                     // #endregion
                   ],
                 ),
                 SizedBox(height: 10),
 
-                /// Paged Settings
+                /// Rollable Settings
                 SectionBox(
                   children: [
                     SizedBox(height: 10),
 
                     ///Appearance row
                     SettingRow(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => AppearanceScreen(),
-                          ),
-                        );
-                      },
                       middleWidget: AppSettingTitleText("Appearance"),
-                      setIcon: SetIcon(icon: Icons.format_size),
-                      endWidget: GoToPage(),
+                      setIcon: SetIcon(icon: Icons.color_lens),
+                      endWidget: GoToPage(
+                        icon: _displayAppearanceOptions == false
+                            ? Icons.chevron_right
+                            : Icons.keyboard_arrow_down,
+                        onTapArrow: () {
+                          setState(() {
+                            _displayAppearanceOptions =
+                                !_displayAppearanceOptions;
+                          });
+                        },
+                      ),
                     ),
+                    if (_displayAppearanceOptions)
+                      SectionBox(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        children: [
+                          SizedBox(height: 10),
+
+                          ///Dark Mode
+                          SettingRow(
+                            middleWidget: AppSettingTitleText("Dark Mode"),
+                            setIcon: SetIcon(icon: Icons.dark_mode),
+                            endWidget: MyStyleSwitch(
+                              value: isDarkMode,
+                              onChanged: (val) {
+                                setState(() {
+                                  isDarkMode = val;
+                                });
+                              },
+                            ),
+                          ),
+
+                          /// Language Select
+                          SettingRow(
+                            middleWidget: AppSettingTitleText("Language"),
+                            setIcon: SetIcon(icon: Icons.language),
+                            endWidget: SizedBox(
+                              width: 120,
+                              child: MyStyleDropdownButtonFormField(
+                                isDense: true,
+                                value: languageSelected,
+                                onChanged: (val) {
+                                  if (languageSelected != val) {
+                                    setState(() {
+                                      languageSelected = val!;
+                                    });
+                                  }
+                                },
+                                items: AppConst.languageOptions,
+                              ),
+                            ),
+                          ),
+
+                          /// ColorScheme Select
+                          SettingRow(
+                            middleWidget: AppSettingTitleText("Color Scheme"),
+                            setIcon: SetIcon(icon: Icons.format_paint),
+                            endWidget: SizedBox(
+                              width: 120,
+                              child: MyStyleDropdownButtonFormField(
+                                // isDense: false,
+                                value: colorSchemeSelected,
+                                onChanged: (val) {
+                                  if (colorSchemeSelected != val) {
+                                    setState(() {
+                                      colorSchemeSelected = val!;
+                                    });
+                                  }
+                                },
+                                items: AppConst.colorSchemeOptions,
+                              ),
+                            ),
+                          ),
+
+                          /// Font Select
+                          SettingRow(
+                            middleWidget: AppSettingTitleText("Font Select"),
+                            setIcon: SetIcon(icon: Icons.font_download),
+                            endWidget: SizedBox(
+                              width: 140,
+                              child: MyStyleDropdownButtonFormField(
+                                // isDense: false,
+                                value: fontSelected,
+                                onChanged: (val) {
+                                  if (fontSelected != val) {
+                                    setState(() {
+                                      fontSelected = val!;
+                                    });
+                                  }
+                                },
+                                items: AppConst.fontSelectOptions,
+                              ),
+                            ),
+                          ),
+
+                          /// Font size
+                          SettingRow(
+                            middleWidget: AppSettingTitleText("Font Select"),
+                            setIcon: SetIcon(icon: Icons.format_size),
+                            endWidget: SizedBox(
+                              width: 140,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  InkWell(
+                                    borderRadius: BorderRadius.circular(50),
+                                    onTap: () {
+                                      setState(() {
+                                        AppConst.plusFontSize++;
+                                      });
+                                    },
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 25,
+                                    ),
+                                  ),
+                                  SizedBox(width: 15),
+                                  InkWell(
+                                    borderRadius: BorderRadius.circular(50),
+                                    onTap: () {
+                                      setState(() {
+                                        AppConst.plusFontSize--;
+                                      });
+                                    },
+                                    child: Icon(
+                                      Icons.remove,
+                                      size: 25,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          SizedBox(height: 10),
+                        ],
+                      ),
 
                     ///Security row
                     SettingRow(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => SecurityScreen(),
-                          ),
-                        );
-                      },
                       middleWidget: AppSettingTitleText("Security"),
                       setIcon: SetIcon(icon: Icons.security),
-                      endWidget: GoToPage(),
+                      endWidget: GoToPage(
+                        icon: _displaySecurityOptions == false
+                            ? Icons.chevron_right
+                            : Icons.keyboard_arrow_down,
+                        onTapArrow: () {
+                          setState(() {
+                            _displaySecurityOptions = !_displaySecurityOptions;
+                          });
+                        },
+                      ),
                     ),
+                    if (_displaySecurityOptions)
+                      SectionBox(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        children: [
+                          SizedBox(height: 10),
+                          SettingRow(
+                            middleWidget: AppSettingTitleText("Use Passkey"),
+                            setIcon: SetIcon(icon: Icons.lock),
+                            endWidget: MyStyleSwitch(
+                              value: usePasscode,
+                              onChanged: (val) {
+                                setState(() {
+                                  usePasscode = val;
+                                });
+                              },
+                            ),
+                          ),
+                          if (usePasscode)
+                            SettingRow(
+                                middleWidget: AppSettingTitleText("Pass Code"),
+                                setIcon: SetIcon(icon: Icons.password),
+                                endWidget: SizedBox(
+                                  width: 100,
+                                  child: MyStyleTextFormField(
+                                    controller: passCodeController,
+                                    obscureText: true,
+                                    maxLength: 4,
+                                    keyboardType: TextInputType.number,
+                                    labelText: "Pass code",
+                                  ),
+                                ))
+                        ],
+                      ),
 
                     ///Notifications row
                     SettingRow(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => NotificationsScreen(),
-                          ),
-                        );
-                      },
                       middleWidget: AppSettingTitleText("Notifications"),
                       setIcon: SetIcon(icon: Icons.notifications),
-                      endWidget: GoToPage(),
+                      endWidget: GoToPage(
+                        icon: _displayNotificationOptions == false
+                            ? Icons.chevron_right
+                            : Icons.keyboard_arrow_down,
+                        onTapArrow: () {
+                          setState(() {
+                            _displayNotificationOptions =
+                                !_displayNotificationOptions;
+                          });
+                        },
+                      ),
                     ),
+                    if (_displayNotificationOptions)
+                      SectionBox(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        children: [
+                          SettingRow(
+                              middleWidget:
+                                  AppSettingTitleText("Notification type"),
+                              setIcon:
+                                  SetIcon(icon: Icons.circle_notifications),
+                              endWidget: MyStyleDropdownButtonFormField(
+                                  value: notificationTypeSelected,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      notificationTypeSelected = val!;
+                                    });
+                                  },
+                                  items: NotificationType.values))
+                        ],
+                      ),
+
                     SizedBox(height: 10)
                   ],
                 ),
@@ -344,6 +472,7 @@ class AppSettingTitleText extends StatelessWidget {
       overflow: TextOverflow.clip,
       title,
       style: TextStyle(
+        fontSize: 14 + AppConst.plusFontSize,
         fontWeight: FontWeight.bold,
         color: AppConst.color7,
       ),
@@ -354,10 +483,12 @@ class AppSettingTitleText extends StatelessWidget {
 ///Go to page
 class GoToPage extends StatelessWidget {
   final VoidCallback? onTapArrow;
+  final IconData? icon;
 
   const GoToPage({
     super.key,
     this.onTapArrow,
+    this.icon,
   });
 
   @override
@@ -371,7 +502,7 @@ class GoToPage extends StatelessWidget {
         width: 30,
         height: 30,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-        child: Icon(Icons.chevron_right),
+        child: Icon(icon ?? Icons.chevron_right),
       ),
     );
   }
@@ -410,21 +541,29 @@ class SetIcon extends StatelessWidget {
 ///Setting Box
 class SectionBox extends StatelessWidget {
   final List<Widget> children;
+  final EdgeInsetsGeometry? padding;
 
-  const SectionBox({super.key, required this.children});
+  const SectionBox({
+    super.key,
+    required this.children,
+    this.padding,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      decoration: BoxDecoration(
-        color: AppConst.color1,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: AppConst.color3,
+    return Padding(
+      padding: padding ?? EdgeInsets.all(0),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: AppConst.color1,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: AppConst.color3,
+          ),
         ),
-      ),
-      child: Column(
-        children: children,
+        child: Column(
+          children: children,
+        ),
       ),
     );
   }
