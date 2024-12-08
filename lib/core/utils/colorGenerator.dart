@@ -2,15 +2,17 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 
-final Color baseColor = Color(0xff9EDF9C);
+final Color baseColor = Color(0xFFB8E7A9);
 final List<Color> colors = [
-  Color(0xffF7FFF7),
-  Color(0xffDDFFDF),
-  Color(0xffC2FFC7),
-  Color(0xff9EDF9C),
-  Color(0xff526E48),
-  Color(0xff30402A),
-  Color(0xff0E120C),
+  Color(0xffFFFFFF),
+  Color(0xFFFAFFFA),
+  Color(0xFFE9F9E9),
+  Color(0xFFD7F3D7),
+  Color(0xFFB8E7A9),
+  Color(0xFF637D5B),
+  Color(0xFF637D5B),
+  Color(0xFF394834),
+  Color(0xFF0E120C),
 ];
 
 List<Color> adjustColors(Color newBaseColor) {

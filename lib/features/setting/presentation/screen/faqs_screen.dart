@@ -92,22 +92,20 @@ class _FaqItemState extends State<FaqItem> {
               children: [
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text.rich(
-                          maxLines: 2,
-                          softWrap: true,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          widget.question,
+                          maxLines: 10,
+                          softWrap: false,
                           overflow: TextOverflow.ellipsis,
-                          TextSpan(children: [
-                            TextSpan(
-                              text: widget.question,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppConst.color6),
-                            )
-                          ])),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppConst.color6),
+                        ),
+                      ),
                     ),
-                    Spacer(),
                     InkWell(
                       borderRadius: BorderRadius.circular(100),
                       onTap: () {
@@ -128,6 +126,7 @@ class _FaqItemState extends State<FaqItem> {
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
                       widget.answer,
+                      //textAlign: TextAlign.start,
                       style: TextStyle(color: AppConst.color5),
                     ),
                   )
