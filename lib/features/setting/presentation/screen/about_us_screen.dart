@@ -52,18 +52,24 @@ class _AboutUsScreen extends State<AboutUsScreen> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back),
+            child: Icon(
+              Icons.arrow_back,
+              color: AppConst.color7,
+            ),
           ),
         ),
         centerTitle: true,
-        title: Text('About us'),
+        title: Text(
+          'About us',
+          style: TextStyle(color: AppConst.color7),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SizedBox(height: 15),
+              // SizedBox(height: 15),
               SectionBox(
                 children: [
                   Padding(
