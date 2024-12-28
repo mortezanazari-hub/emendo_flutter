@@ -4,7 +4,7 @@ import 'package:emendo/core/utils/get_api_token.dart';
 
 class AppConst {
   ///version:
-  static const String appVersion = "ver: 0.1a";
+  static const String appVersion = "0.1.0";
 
   ///api provider
   static const String apiBase = "https://emendo.liara.run/api";

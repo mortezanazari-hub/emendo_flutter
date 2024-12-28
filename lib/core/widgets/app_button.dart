@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:emendo/core/utils/app_const.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class AppButton extends StatelessWidget {
   final String text;
@@ -16,18 +17,23 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppConst.standardPadding),
-      child: SizedBox(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppConst.color3),
+          color: AppConst.color2,
+        ),
         width: double.infinity,
         height: AppConst.screenWidth * 0.12,
         child: TextButton(
           onPressed: onPressed,
           style: const ButtonStyle(
-              backgroundColor: WidgetStatePropertyAll(AppConst.mainColor)),
+              surfaceTintColor: WidgetStatePropertyAll(AppConst.color2),
+              backgroundColor: WidgetStatePropertyAll(AppConst.color1)),
           child: Text(
             text,
             style: TextStyle(
-                color: AppConst.secondColor,
-                fontSize: AppConst.screenWidth * 0.035),
+                color: AppConst.color6, fontSize: AppConst.screenWidth * 0.035),
           ),
         ),
       ),

@@ -103,7 +103,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         foregroundImage: AssetImage(_avatarAddress),
                         radius: 16,
                       ),
-                      endWidget: GoToPage()),
+                      endWidget: EndSettingRowWidget()),
 
                   ///subscription row
                   SettingRow(
@@ -116,7 +116,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     },
                     middleWidget: _textOfPro(),
                     setIcon: SetIcon(icon: Icons.attach_money),
-                    endWidget: GoToPage(),
+                    endWidget: EndSettingRowWidget(),
                   ),
 
                   SizedBox(height: 10),
@@ -141,7 +141,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     SettingRow(
                       middleWidget: AppSettingTitleText("Appearance"),
                       setIcon: SetIcon(icon: Icons.color_lens),
-                      endWidget: GoToPage(
+                      endWidget: EndSettingRowWidget(
                         icon: _displayAppearanceOptions == false
                             ? Icons.chevron_right
                             : Icons.keyboard_arrow_down,
@@ -283,7 +283,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     SettingRow(
                       middleWidget: AppSettingTitleText("Security"),
                       setIcon: SetIcon(icon: Icons.security),
-                      endWidget: GoToPage(
+                      endWidget: EndSettingRowWidget(
                         icon: _displaySecurityOptions == false
                             ? Icons.chevron_right
                             : Icons.keyboard_arrow_down,
@@ -332,7 +332,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     SettingRow(
                       middleWidget: AppSettingTitleText("Notifications"),
                       setIcon: SetIcon(icon: Icons.notifications),
-                      endWidget: GoToPage(
+                      endWidget: EndSettingRowWidget(
                         icon: _displayNotificationOptions == false
                             ? Icons.chevron_right
                             : Icons.keyboard_arrow_down,
@@ -385,7 +385,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       },
                       middleWidget: AppSettingTitleText("Send us a message"),
                       setIcon: SetIcon(icon: Icons.send),
-                      endWidget: GoToPage(),
+                      endWidget: EndSettingRowWidget(),
                     ),
 
                     ///About us row
@@ -399,7 +399,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       },
                       middleWidget: AppSettingTitleText("About us"),
                       setIcon: SetIcon(icon: Icons.info),
-                      endWidget: GoToPage(),
+                      endWidget: EndSettingRowWidget(),
                     ),
 
                     ///FAQ row
@@ -413,7 +413,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       },
                       middleWidget: AppSettingTitleText("FAQs"),
                       setIcon: SetIcon(icon: Icons.question_answer),
-                      endWidget: GoToPage(),
+                      endWidget: EndSettingRowWidget(),
                     ),
                     SizedBox(height: 10)
                   ],
@@ -481,14 +481,16 @@ class AppSettingTitleText extends StatelessWidget {
 }
 
 ///Go to page
-class GoToPage extends StatelessWidget {
+class EndSettingRowWidget extends StatelessWidget {
   final VoidCallback? onTapArrow;
   final IconData? icon;
+  final Color? color;
 
-  const GoToPage({
+  const EndSettingRowWidget({
     super.key,
     this.onTapArrow,
     this.icon,
+    this.color,
   });
 
   @override
@@ -502,7 +504,7 @@ class GoToPage extends StatelessWidget {
         width: 30,
         height: 30,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
-        child: Icon(icon ?? Icons.chevron_right),
+        child: Icon(icon ?? Icons.chevron_right, color: color),
       ),
     );
   }
