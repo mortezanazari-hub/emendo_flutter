@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:emendo/core/utils/app_const.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class AppButton extends StatelessWidget {
   final String text;

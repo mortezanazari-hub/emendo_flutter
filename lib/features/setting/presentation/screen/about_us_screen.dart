@@ -1,5 +1,4 @@
 import 'package:emendo/core/utils/app_const.dart';
-import 'package:emendo/core/widgets/app_button.dart';
 import 'package:emendo/features/setting/presentation/screen/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';

@@ -3,7 +3,6 @@ import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/widgets/app_button.dart';
 import 'package:emendo/core/widgets/app_link_text.dart';
 import 'package:emendo/di.dart';
-import 'package:emendo/features/auth/domain/entities/verify_email_entity.dart';
 import 'package:emendo/features/auth/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:emendo/features/auth/presentation/pages/register_screen.dart';
 
@@ -14,17 +13,19 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../widgets/register_success_modal.dart';
 import '../widgets/result_icon.dart';
 
-class Verification_Screen extends StatefulWidget {
-  Verification_Screen({super.key,required this.token});
+class VerificationScreen extends StatefulWidget {
+  const VerificationScreen({super.key, required this.token});
 
-  String token;
+  final String token;
+
   @override
-  State<Verification_Screen> createState() => _Verification_ScreenState();
+  State<VerificationScreen> createState() => _VerificationScreenState();
 }
 
-class _Verification_ScreenState extends State<Verification_Screen> {
+class _VerificationScreenState extends State<VerificationScreen> {
   late AuthBloc bloc;
   late TextEditingController verificationCode;
+
   @override
   void initState() {
     super.initState();
@@ -38,6 +39,7 @@ class _Verification_ScreenState extends State<Verification_Screen> {
     bloc.close();
     verificationCode.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,16 +128,20 @@ class _Verification_ScreenState extends State<Verification_Screen> {
             SizedBox(height: AppConst.standardPadding),
             BlocConsumer(
               bloc: bloc,
-              buildWhen: (previous, current) => current is ValidationEmailLoading || current is ValidationEmailSuccess || current is ValidationEmailFailed,
-              listenWhen: (previous, current) => current is ValidationEmailLoading || current is ValidationEmailSuccess || current is ValidationEmailFailed,
+              buildWhen: (previous, current) =>
+                  current is ValidationEmailLoading ||
+                  current is ValidationEmailSuccess ||
+                  current is ValidationEmailFailed,
+              listenWhen: (previous, current) =>
+                  current is ValidationEmailLoading ||
+                  current is ValidationEmailSuccess ||
+                  current is ValidationEmailFailed,
               listener: (context, state) {
-                if(state is ValidationEmailFailed){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.message)
-                      )
-                  );
+                if (state is ValidationEmailFailed) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(state.message)));
                 }
-                if(state is ValidationEmailSuccess){
+                if (state is ValidationEmailSuccess) {
                   locator<SharedPrefOperator>().setUserToken(widget.token);
                   showModalBottomSheet(
                       backgroundColor: Colors.white,
@@ -154,16 +160,15 @@ class _Verification_ScreenState extends State<Verification_Screen> {
                       });
                 }
               },
-              builder: (context,state){
-                if(state is ValidationEmailLoading){
+              builder: (context, state) {
+                if (state is ValidationEmailLoading) {
                   return Center(child: CircularProgressIndicator());
                 }
                 return AppButton(
                     text: "Submit",
                     onPressed: () {
                       bloc.add(
-                        ValidationEmailEvent(code: verificationCode.text)
-                      );
+                          ValidationEmailEvent(code: verificationCode.text));
                     });
               },
             ),

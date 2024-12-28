@@ -23,7 +23,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  late TextEditingController userNameController ;
+  late TextEditingController userNameController;
+
   late TextEditingController emailOrNumberController;
   late TextEditingController passwordController;
   late AuthBloc bloc;
@@ -45,7 +46,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     passwordController.dispose();
     bloc.close();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,53 +86,59 @@ class _RegisterScreenState extends State<RegisterScreen> {
               onChanged: (value) => {},
             ),
             SizedBox(height: AppConst.standardPadding),
-                BlocConsumer(
-                  bloc: bloc,
-                  buildWhen: (previous, current) => current is RegisterLoading || current is RegisterSuccess || current is RegisterFailed,
-                  listenWhen: (previous, current) => current is RegisterLoading || current is RegisterSuccess || current is RegisterFailed,
-                  listener: (context, state) {
-                    if(state is RegisterFailed){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(state.message)
-                          )
-                      );
-                    }
-                    if(state is RegisterSuccess){
-                      AuthEntity authEntity = state.authEntity;
-                      locator<SharedPrefOperator>().setUserToken(state.authEntity.token);
+            BlocConsumer(
+              bloc: bloc,
+              buildWhen: (previous, current) =>
+                  current is RegisterLoading ||
+                  current is RegisterSuccess ||
+                  current is RegisterFailed,
+              listenWhen: (previous, current) =>
+                  current is RegisterLoading ||
+                  current is RegisterSuccess ||
+                  current is RegisterFailed,
+              listener: (context, state) {
+                if (state is RegisterFailed) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(state.message)));
+                }
+                if (state is RegisterSuccess) {
+                  AuthEntity authEntity = state.authEntity;
+                  locator<SharedPrefOperator>()
+                      .setUserToken(state.authEntity.token);
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(state.authEntity.message),
-                            backgroundColor: Colors.green,
-                          )
-                      );
-                      SnackBar(content: Text(state.authEntity.message));
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Verification_Screen(token: authEntity.token,),),
-                      );
-                    }
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(state.authEntity.message),
+                    backgroundColor: Colors.green,
+                  ));
+                  SnackBar(content: Text(state.authEntity.message));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VerificationScreen(
+                        token: authEntity.token,
+                      ),
+                    ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                if (state is RegisterLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return AppButton(
+                  text: "Create Account",
+                  onPressed: () {
+                    bloc.add(RegisterEvent(
+                      registerParam: RegisterParam(
+                        userNameController.text,
+                        emailOrNumberController.text,
+                        passwordController.text,
+                      ),
+                    ));
                   },
-                  builder: (context,state){
-                    if(state is RegisterLoading){
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    return AppButton(
-                      text: "Create Account",
-                      onPressed: () {
-                        bloc.add(
-                          RegisterEvent(
-                              registerParam: RegisterParam(
-                                  userNameController.text,
-                                  emailOrNumberController.text,
-                                  passwordController.text,
-                              ),
-                          )
-                        );
-                      },
-                    );
-                  },
-                ),
+                );
+              },
+            ),
             SizedBox(height: AppConst.standardPadding * 0.5),
             Padding(
               padding: EdgeInsets.only(right: AppConst.standardPadding),

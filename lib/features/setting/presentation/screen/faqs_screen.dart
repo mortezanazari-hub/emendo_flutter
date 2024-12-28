@@ -2,7 +2,6 @@ import 'package:emendo/core/utils/app_const.dart';
 import 'package:emendo/core/widgets/app_button.dart';
 import 'package:emendo/features/setting/data/local/fake_faq_db.dart';
 import 'package:emendo/features/setting/data/model/faq_model.dart';
-import 'package:emendo/features/setting/presentation/screen/setting_screen.dart';
 import 'package:emendo/features/setting/presentation/widget/faq_item_widget.dart';
 import 'package:flutter/material.dart';
 

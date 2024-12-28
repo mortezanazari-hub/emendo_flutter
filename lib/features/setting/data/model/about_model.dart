@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class AboutModel {
   final String? siteUrl;
   final String aboutText;
